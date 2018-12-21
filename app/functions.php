@@ -37,7 +37,7 @@ if (!function_exists('read_alert')) {
 
 if (!function_exists('read_alert')) {
     /**
-     * Echoes the retrieved alerts and resets the array
+     * Echoes the current alerts and empties the alerts array
      *
      * @return void
      */
