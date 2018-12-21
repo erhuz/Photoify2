@@ -5,4 +5,13 @@
     <p>This is the home page.</p>
 </article>
 
+<article>
+    <form action="/app/posts/store.php" method="post" enctype="multipart/form-data">
+        <label for="image">Picture</label>
+        <input type="file" name="image" id="image">
+        <label for="content">Description / Content</label>
+        <textarea name="content" id="content" cols="20" rows="10"></textarea>
+    </form>
+</article>
+
 <?php require __DIR__.'/views/footer.php'; ?>
