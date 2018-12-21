@@ -17,7 +17,7 @@ if (!function_exists('redirect')) {
     }
 }
 
-if (!function_exists('read_alert')) {
+if (!function_exists('set_alert')) {
     /**
      * Sets an alert for the user to read. Such as errors, warnings, notifications and success messages.
      *
@@ -35,25 +35,19 @@ if (!function_exists('read_alert')) {
     }
 }
 
-if (!function_exists('read_alert')) {
+if (!function_exists('get_alerts')) {
     /**
      * Echoes the current alerts and empties the alerts array
      *
      * @return void
      */
-    function read_alert()
+    function get_alerts()
     {
-        if(isset($_SESSION['alerts'])):
-            foreach($_SESSION['alerts'] as $alert):
-
-?>
-<div class="alert alert-<?= $alert['type'] ?>" role="alert">
-    <?= $alert['content'] ?>
-</div>
-<?php
-
-            endforeach;
-        endif;
+        if(isset($_SESSION['alerts'])){
+            foreach($_SESSION['alerts'] as $alert){
+                require('/views/components/alert.php');
+            }
+        }
 
     unset($_SESSION['alerts']);
     }
