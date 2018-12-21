@@ -6,27 +6,30 @@ require __DIR__.'/../autoload.php';
 
 // In this file we store/insert new posts in the database.
 
-if(USER_LOGGEDIN && isset($_POST[''], $_POST[''])){
+if(USER_LOGGEDIN && isset($_POST['image'], $_POST['content'])){
+
+    dd($_POST['image']);
+
+    $file_parts = pathinfo($_POST['image']);
+    $file_parts['extension'];
+
+    // $image = filter_var();
+    $content = filter_var();
+
     $query = 'INSERT INTO posts (users_id, image, content) VALUES (:user_id, :image, :content);';
-
     $stmt = $pdo->prepare($query);
-
     $result = $stmt->execute($stmt, [
-        ':user_id' => $_SESSION['user'][id],
+        ':user_id' => User[id],
         ':image' => '',
         ':content' => ''
     ]);
 
     if(!$result){
-        $mess = 'EITHER: you are not logged in OR: some form inputs went missing';
-
-        $_SESSION['messages'][] = $mess;
+        set_alert('Something went wrong, Please try again!', 'danger');
     }
 
 }else{
-    $mess = 'EITHER: you are not logged in OR: some form inputs went missing';
-
-    $_SESSION['messages'][] = $mess;
+    set_alert('EITHER: you are not logged in OR: some form inputs went missing.', 'danger');
 }
 
 redirect('/');
