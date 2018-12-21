@@ -22,7 +22,7 @@ if(isset($_POST['name'], $_POST['email'], $_POST['password'], $_POST['c_password
     $stmt->execute([
        ':name' => $name,
        ':email' => $email,
-       ':password' => password_hash($password)
+       ':password' => password_hash($password, PASSWORD_DEFAULT)
     ]);
 
     set_alert('Registration successfull!', 'success');
