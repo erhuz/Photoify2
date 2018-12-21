@@ -5,3 +5,6 @@ declare(strict_types=1);
 require __DIR__.'/../autoload.php';
 
 // In this file we logout users.
+unset($_SESSION['user']);
+set_alert('You are now logged out.');
+redirect('/');
