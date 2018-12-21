@@ -17,3 +17,4 @@ require __DIR__.'/../app/autoload.php';
     <?php require __DIR__.'/navigation.php'; ?>
 
     <div class="container py-5">
+        <?php get_alerts(); ?>
