@@ -28,8 +28,7 @@ if(USER_LOGGEDIN && isset($_POST['image'], $_POST['content'])){
         set_alert('Something went wrong, Please try again!', 'danger');
     }
 
-}else{
-    set_alert('EITHER: you are not logged in OR: some form inputs went missing.', 'danger');
 }
 
+set_alert('Something went wrong, please try again!', 'danger');
 redirect('/');
