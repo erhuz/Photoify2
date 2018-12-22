@@ -2,11 +2,11 @@
     <a class="navbar-brand" href="#"><?php echo $config['title']; ?></a>
 
     <ul class="navbar-nav">
-        <li class="nav-item <? ($page === 'home') ? 'active' : NULL?>">
+        <li class="nav-item <?= ($page === 'home') ? 'active' : NULL?>">
             <a class="nav-link" href="/index.php">Home</a>
         </li><!-- /nav-item -->
 
-        <li class="nav-item <? ($page === 'about') ? 'active' : NULL?>">
+        <li class="nav-item <?= ($page === 'about') ? 'active' : NULL?>">
             <a class="nav-link" href="/about.php">About</a>
         </li><!-- /nav-item -->
         <?php if(USER_LOGGEDIN): ?>
@@ -17,11 +17,11 @@
 
         <?php else: ?>
 
-            <li class="nav-item <? ($page === 'login') ? 'active' : NULL?>">
+            <li class="nav-item <?= ($page === 'login') ? 'active' : NULL?>">
                 <a class="nav-link" href="/login.php">Login</a>
             </li><!-- /nav-item -->
 
-            <li class="nav-item <? ($page === 'register') ? 'active' : NULL?>">
+            <li class="nav-item <?= ($page === 'register') ? 'active' : NULL?>">
                 <a class="nav-link" href="/register.php">Register</a>
             </li><!-- /nav-item -->
         <?php endif; ?>
