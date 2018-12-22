@@ -16,15 +16,22 @@ if(isset($_POST['email'], $_POST['password'])){
     ]);
     $result = $stmt->fetch();
 
+    // die(var_dump(($result)));
+    if(!$result){
+        set_alert('Login failed: Email or password was invalid.', 'danger');
+        redirect('/login.php');
+    }
+
+
     if(password_verify($password, $result['password'])){
         $_SESSION['user'] = $result;
 
-        set_alert('Registration successfull!', 'success');
+        set_alert('Login successfull!', 'success');
         redirect('/');
     }
         set_alert('Login failed: Email or password was invalid.', 'danger');
-        redirect('/');
+        redirect('/login.php');
 }
 
 set_alert('Something went wrong, please try again!', 'warning');
-redirect('/');
+redirect('/login.php');
