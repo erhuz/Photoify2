@@ -8,7 +8,7 @@ require __DIR__.'/../autoload.php';
 
 if(USER_LOGGEDIN && isset($_POST['image'], $_POST['content'])){
 
-    dd($_POST['image']);
+    die(var_dump($_POST['image']));
 
     $file_parts = pathinfo($_POST['image']);
     $file_parts['extension'];
