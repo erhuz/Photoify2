@@ -28,7 +28,7 @@ if (!function_exists('set_alert')) {
      */
     function set_alert($message, $type = 'primary')
     {
-        $mess['message'] = $message;
+        $mess['content'] = $message;
         $mess['type'] = $type;
 
         $_SESSION['alerts'][] = $mess;
@@ -45,7 +45,7 @@ if (!function_exists('get_alerts')) {
     {
         if(isset($_SESSION['alerts'])){
             foreach($_SESSION['alerts'] as $alert){
-                require('/views/components/alert.php');
+                require(realpath(dirname(__FILE__) . '/../views/components/alert.php'));
             }
         }
 
