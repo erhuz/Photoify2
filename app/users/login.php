@@ -16,7 +16,6 @@ if(isset($_POST['email'], $_POST['password'])){
     ]);
     $result = $stmt->fetch();
 
-    // die(var_dump(($result)));
     if(!$result){
         set_alert('Login failed: Email or password was invalid.', 'danger');
         redirect('/login.php');
