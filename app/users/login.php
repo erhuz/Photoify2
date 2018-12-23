@@ -14,13 +14,12 @@ if(isset($_POST['email'], $_POST['password'])){
     $stmt->execute([
        ':email' => $email
     ]);
-    $result = $stmt->fetch();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if(!$result){
         set_alert('Login failed: Email or password was invalid.', 'danger');
         redirect('/login.php');
     }
-
 
     if(password_verify($password, $result['password'])){
         $_SESSION['user'] = $result;
