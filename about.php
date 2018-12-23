@@ -1,3 +1,5 @@
+<?php $page = 'about'; ?>
+
 <?php require __DIR__.'/views/header.php'; ?>
 
 <article>
