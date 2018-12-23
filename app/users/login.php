@@ -24,7 +24,7 @@ if(isset($_POST['email'], $_POST['password'])){
     if(password_verify($password, $result['password'])){
         $_SESSION['user'] = $result;
 
-        set_alert('Login successfull!', 'success');
+        set_alert("Welcome home, <b>{$result['name']}</b>.", 'info');
         redirect('/');
     }
         set_alert('Login failed: Email or password was invalid.', 'danger');
