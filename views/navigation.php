@@ -17,8 +17,15 @@
 
             <?php if(USER_IS_LOGGEDIN): ?>
 
-            <li class="nav-item">
-                <a class="nav-link" href="/app/users/logout.php">Log out</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <?= User['name'] ?>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/profile.php">Profile</a>
+                    <a class="dropdown-item" href="/app/users/logout.php">Log out</a>
+                </div>
             </li><!-- /nav-item -->
 
             <?php else: ?>
