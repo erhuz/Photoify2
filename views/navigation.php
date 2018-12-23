@@ -9,7 +9,7 @@
         <li class="nav-item <?= ($page === 'about') ? 'active' : NULL?>">
             <a class="nav-link" href="/about.php">About</a>
         </li><!-- /nav-item -->
-        <?php if(USER_LOGGEDIN): ?>
+        <?php if(USER_IS_LOGGEDIN): ?>
 
             <li class="nav-item">
                 <a class="nav-link" href="/app/users/logout.php">Log out</a>

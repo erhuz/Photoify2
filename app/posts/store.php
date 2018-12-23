@@ -6,7 +6,7 @@ require __DIR__.'/../autoload.php';
 
 // In this file we store/insert new posts in the database.
 
-if(USER_LOGGEDIN && isset($_POST['image'], $_POST['content'])){
+if(USER_IS_LOGGEDIN && isset($_POST['image'], $_POST['content'])){
 
     die(var_dump($_POST['image']));
 
