@@ -6,7 +6,7 @@ CREATE TABLE users (
     name varchar(255) NOT NULL,
     email varchar(255) NOT NULL,
     password varchar(255) NOT NULL,
-    avatar varchar(511) DEFAULT NULL,
+    avatar varchar(511) DEFAULT NULL DEFAULT "avatar.png",
     bio varchar(511) DEFAULT NULL,
     created_at TIMESTAMP DATETIME DEFAULT CURRENT_TIMESTAMP
     -- updated_at TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
