@@ -2,13 +2,6 @@
 
 <?php require __DIR__.'/views/header.php'; ?>
 
-<article class="row">
-    <div class="col">
-        <h1>Profile</h1>
-        <p>Here you can edit all stored information about your account.</p>
-    </div>
-</article>
-
 <div class="row user-profile">
     <div class="col">
 
@@ -46,16 +39,12 @@
                     <span class="img-change">Click it to change!</span>
                 </p>
 
-                <div
-                    class="inner-profile-img-container"
-                    style="background-image: url('<?= '/uploads/avatars/' . User['avatar'] ?>')"
-                >
+                <div class="inner-profile-img-container" style="background-image: url('<?= '/uploads/avatars/' . User['avatar'] ?>')">
                     <div class="middle">
                         <div class="text">Change</div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
