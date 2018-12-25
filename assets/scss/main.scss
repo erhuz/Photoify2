@@ -1,0 +1,151 @@
+$iconic-gradient: linear-gradient(135deg, #1c5d8e 0%,#863589 50%,#d63b5d 100%);
+
+.user-profile{
+
+    .profile-img-form{
+        display: none;
+    }
+
+    .img-upload{
+        display: none;
+    }
+
+    .profile-img-container{
+        display       : flex;
+        flex-direction: column;
+        order         : -1;
+
+        .inner-profile-img-container{
+            border-radius      : 5px;
+            background-color   : #0000001a;
+            border             : 1px solid #0000001a;
+            width              : 100%;
+            padding-top        : 100%;                 /* 1:1 Aspect Ratio */
+            position           : relative;
+            background-position: center             ;
+            background-size    : cover;                /* If you want text inside of it */
+            background-repeat  : no-repeat;
+        }
+
+        .img-change{
+            font-weight: bold;
+            cursor     : pointer;
+        }
+    }
+
+    .middle{
+        display: none;
+    }
+
+    .description{
+        margin: 0;
+    }
+    .manage-posts{
+        order: 1;
+    }
+
+    @media screen and (min-width: 992px) {
+
+        .description{
+            padding-top   : 16px;
+            padding-bottom: 8px;
+        }
+
+        .middle{
+            display: initial;
+        }
+
+        .profile-img-container{
+            margin-top     : 47px;
+            justify-content: flex-end;
+            flex-direction : column-reverse;
+            order          : 0;
+
+            > div{
+                cursor: pointer;
+            }
+
+            .middle {
+                transition   : .5s ease;
+                opacity      : 0;
+                position     : absolute;
+                top          : 50%;
+                left         : 50%;
+                transform    : translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+                text-align   : center;
+            }
+
+            &:hover{
+                .middle {
+                    opacity: 1;
+                }
+                .image {
+                    opacity: 0.3;
+                }
+            }
+
+            .text {
+                user-select     : none;
+                background-color: #333;
+                color           : #fff;
+                font-size       : 16px;
+                font-weight     : bold;
+                padding         : 16px 32px;
+            }
+        }
+    }
+}
+
+
+.post{
+    margin: 64px 0 0 0;
+
+    a{
+        text-decoration: none;
+        color          : rgba(0, 0, 0, 0.7);
+    }
+
+    img{
+        width: 100%;
+    }
+
+    .card-body{
+        padding: 0;
+
+        .card-text{
+            padding: 20px;
+        }
+    }
+}
+
+.card-header{
+    display       : flex;
+    flex-direction: row;
+    align-items   : center;
+
+    h5{
+        margin: 0 0 0 8px;
+    }
+}
+
+.profile-picture-container{
+    border-radius: 50%;
+    height       : 40px;
+    width        : 40px;
+    background   : $iconic-gradient;
+
+    img{
+        width : 34px;
+        height: 34px;
+        margin: 3px;
+    }
+}
+
+#img-preview-input{
+    cursor: pointer;
+}
+
+.display-none{
+    display: none;
+}
