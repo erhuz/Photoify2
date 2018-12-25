@@ -6,7 +6,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item <?= ($page === 'home') ? 'active' : NULL?>">
                 <a class="nav-link" href="/index.php">Home</a>
             </li><!-- /nav-item -->
@@ -14,7 +14,8 @@
             <li class="nav-item <?= ($page === 'about') ? 'active' : NULL?>">
                 <a class="nav-link" href="/about.php">About</a>
             </li><!-- /nav-item -->
-
+        </ul>
+        <ul class="navbar-nav ml-auto">
             <?php if(USER_IS_LOGGEDIN): ?>
 
             <li class="nav-item dropdown">
@@ -23,8 +24,9 @@
                     <?= User['name'] ?>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/profile.php">Profile</a>
-                    <a class="dropdown-item" href="/app/users/logout.php">Log out</a>
+                    <a class="dropdown-item" href="/account.php"><i class="fa fa-user-circle-o" aria-hidden="true"></i> My profile</a>
+                    <a class="dropdown-item" href="/account.php"><i class="fa fa-cog" aria-hidden="true"></i> My account</a>
+                    <a class="dropdown-item" href="/app/users/logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Log out</a>
                 </div>
             </li><!-- /nav-item -->
 
