@@ -2,9 +2,49 @@
 
 <?php require __DIR__.'/views/header.php'; ?>
 
-<article>
-    <h1><?php echo $config['title']; ?></h1>
-    <p>This is the home page.</p>
+<?php
+    $query = 'SELECT posts.id, user_id, posts.image, posts.description, posts.created_at, users.name, users.avatar
+    FROM posts
+    JOIN users ON posts.user_id = users.id;
+    ';
+
+    $stmt = $pdo->prepare($query);
+
+    if(!$stmt){
+        die(var_dump($pdo->errorInfo()));
+    }
+
+    $stmt->execute();
+    $posts = $stmt->fetchAll();
+
+    print_r($posts);
+?>
+
+<article class="row">
+    <h1 class="col-12">
+        <?= $config['title']; ?>
+    </h1>
+    <p class="col-12">Welcome to <?= $config['title'] ?>. Sign up to get started or check out the posts below!</p>
+    <?php if(USER_IS_LOGGEDIN): ?>
+    <div class="col-12">
+        <a href="/post.php" class="mr-2 btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Create Post</button>
+        <a href="#" class="mr-2 btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i> Manage Posts</a>
+
+
+        <!-- <button type="button" class="btn btn-danger">Danger</button>
+        <button type="button" class="btn btn-warning"> Edit</button>
+        <button type="button" class="btn btn-info">Info</button>
+        <button type="button" class="btn btn-light">Light</button>
+        <button type="button" class="btn btn-dark">Dark</button> -->
+
+    </div>
+    <?php endif; ?>
+</article>
+
+<article class="row">
+    <?php foreach($posts as $post): ?>
+        <?php require '/views/components/post.php'; ?>
+    <?php endforeach; ?>
 </article>
 
 <?php require __DIR__.'/views/footer.php'; ?>
