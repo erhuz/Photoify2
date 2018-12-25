@@ -36,12 +36,12 @@ if(USER_IS_LOGGEDIN && isset($_POST['name'], $_POST['email'])){
         }
 
         set_alert('Update successfull!', 'success');
-        redirect('/profile.php');
+        redirect('/account.php');
     }
 
 
     set_alert('Update failed, please try again!', 'danger');
-    redirect('/profile.php');
+    redirect('/account.php');
 }
 
 // Password reset
@@ -51,7 +51,7 @@ if(USER_IS_LOGGEDIN && isset($_POST['password'], $_POST['c_password'])){
 
     if($password !== $c_password){
         set_alert('Passwords did not match.', 'warning');
-        redirect('/profile.php');
+        redirect('/account.php');
     }
 
     $query = 'UPDATE users SET password=:password WHERE id=:id;';
@@ -62,7 +62,7 @@ if(USER_IS_LOGGEDIN && isset($_POST['password'], $_POST['c_password'])){
     ]);
 
     set_alert('Password updated successfully!', 'success');
-    redirect('/profile.php');
+    redirect('/account.php');
 }
 
 // Change avatar
@@ -90,7 +90,7 @@ if(USER_IS_LOGGEDIN && isset($_FILES['avatar'])){
             ]);
 
             // Delete last used avatar if set
-            if(User['avatar'] !== ''){
+            if(User['avatar'] !== 'avatar.png'){
                 unlink ( $upload_dir . User['avatar']);
             }
 
@@ -98,22 +98,22 @@ if(USER_IS_LOGGEDIN && isset($_FILES['avatar'])){
             $_SESSION['user']['avatar'] = $file_name;
 
             set_alert('Successfully changed avatar!', 'success');
-            redirect('/profile.php');
+            redirect('/account.php');
         } else {
 
             // the file wasn't moved correctly
             set_alert('Something went wrong, please try again!', 'danger');
-            redirect('/profile.php');
+            redirect('/account.php');
         }
     } else {
 
         // error this file ext is not allowed
         set_alert("File extension <b>.$file_extension</b> not allowed. Allowed extensions: jpg, jpeg, gif, png", 'danger');
-        redirect('/profile.php');
+        redirect('/account.php');
     }
 }
 
 
 
 set_alert('Something went wrong, please try again!', 'danger');
-redirect('/profile.php');
+redirect('/account.php');
