@@ -13,7 +13,7 @@
                 </div>
 
                 <a class="card-image" href="#">
-                    <img class="" src="<?= $post['image'] ?>" alt="Card image cap">
+                    <img class="" src="<?= $post['image'] ?>" alt="<?= $post['description'] ?>">
                 </a>
 
                 <div class="card-body">
