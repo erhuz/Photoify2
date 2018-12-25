@@ -70,11 +70,7 @@ if(USER_IS_LOGGEDIN && isset($_FILES['avatar'])){
     // Allowed file extensions
     $allow = array("jpg", "jpeg", "gif", "png");
 
-    // I could have used the magic constant __DIR__ here, i know,
-    // But $_SERVER['DOCUMENT_ROOT'] differs from __DIR__.
-    // This is easier to read. So unless __DIR__ has better performance
-    // this is my way to go.
-    $upload_dir = $_SERVER['DOCUMENT_ROOT'] . '/uploads/avatars/';
+    $upload_dir = __DIR__ . '/../../uploads/avatars/';
 
     $file_extension = pathinfo($_FILES['avatar']['name'])['extension'];
 
