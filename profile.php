@@ -48,11 +48,7 @@
 
                 <div
                     class="inner-profile-img-container"
-                    style="background-image: url('<?=
-                    (User['avatar'] !== '')
-                    ? '/uploads/avatars/' . User['avatar']
-                    : 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'
-                    ?>')"
+                    style="background-image: url('<?= '/uploads/avatars/' . User['avatar'] ?>')"
                 >
                     <div class="middle">
                         <div class="text">Change</div>
