@@ -4,7 +4,7 @@
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name varchar(255) NOT NULL,
-    email varchar(255) NOT NULL,
+    email varchar(255) UNIQUE,
     password varchar(255) NOT NULL,
     avatar varchar(511) DEFAULT NULL DEFAULT "avatar.png",
     bio varchar(511) DEFAULT NULL,
