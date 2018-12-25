@@ -18,15 +18,19 @@ if(isset($_POST['name'], $_POST['email'], $_POST['password'], $_POST['c_password
     }
 
     $query = 'INSERT INTO users (name, email, password) VALUES (:name, :email, :password);';
+    $params = [
+        ':name' => $name,
+        ':email' => $email,
+        ':password' => password_hash($password, PASSWORD_DEFAULT)
+    ];
     $stmt = $pdo->prepare($query);
-    $stmt->execute([
-       ':name' => $name,
-       ':email' => $email,
-       ':password' => password_hash($password, PASSWORD_DEFAULT)
-    ]);
+    if($stmt->execute($params)){
+        set_alert('Registration successfull!', 'success');
+        redirect('/login.php');
+    }
 
-    set_alert('Registration successfull!', 'success');
-    redirect('/');
+    set_alert('Email is already associated with another account.', 'danger');
+    redirect('/register.php');
 }
 
 
