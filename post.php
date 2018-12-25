@@ -1,21 +1,23 @@
 <?php require __DIR__.'/views/header.php'; ?>
 
 <article class="row">
-    <h1>New post</h1>
+    <div class="col">
+        <h1>New post</h1>
+    </div>
 </article>
 
 <article>
     <section class="row justify-content-center">
-    <div class="card-image">
-        <img class="" src="<?= $post['description'] ?>" alt="Card image cap">
+    <div class="col-md-6 post mt-2">
+        <img id="img-preview-input" class="rounded" src="/uploads/posts/Placeholder.png" alt="Placeholder image">
+        <div class="btn btn-primary mt-2">Change image</div>
     </div>
     </section>
     <section class="row justify-content-center">
         <div class="col-md-6">
-            <form action="/app/posts/store.php" method="post" enctype="multipart/form-data">
-                <label class="mt-4" for="image">Picture</label>
-                <input type="file" name="image" id="image" required>
-
+            <form class="create-post-form" action="/app/posts/store.php" method="post" enctype="multipart/form-data">
+                <label class="mt-4 display-none" for="image">Picture</label>
+                <input class="display-none" type="file" name="image" id="image" required>
                 <label class="mt-4" for="content">Description / Content</label>
                 <textarea
                     class="form-control"
