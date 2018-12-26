@@ -18,11 +18,11 @@
             <form class="create-post-form" action="/app/posts/store.php" method="post" enctype="multipart/form-data">
                 <label class="mt-4 display-none" for="image">Picture</label>
                 <input class="display-none" type="file" name="image" id="image" required>
-                <label class="mt-4" for="content">Description / Content</label>
+                <label class="mt-4" for="content">Description</label>
                 <textarea
                     class="form-control"
-                    name="content"
-                    id="content"
+                    name="description"
+                    id="description"
                     cols="20"
                     rows="5"
                     maxlength="128"
