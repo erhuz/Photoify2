@@ -12,14 +12,20 @@
                             <?= $post['name'] ?></a></h5>
                 </div>
 
-                <a class="card-image" href="#">
-                    <img class="" src="<?= $post['image'] ?>" alt="<?= $post['description'] ?>">
-                </a>
+                <div class="card-image">
+                    <img src="<?= '/uploads/posts/' . $post['image'] ?>" alt="<?= $post['description'] ?>">
+                </div>
 
                 <div class="card-body">
                     <div class="card-text">
-                        <p><?= $post['description'] ?></p>
+                        <p>
+                            <?= $post['description'] ?>
+                        </p>
                     </div>
+                </div>
+
+                <div class="card-footer text-muted">
+                    Uploaded: <?= $post['created_at'] ?>
                 </div>
 
             </div>
