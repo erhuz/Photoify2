@@ -6,26 +6,48 @@ require __DIR__.'/../autoload.php';
 
 // In this file we store/insert new posts in the database.
 
-if(USER_IS_LOGGEDIN && isset($_POST['image'], $_POST['content'])){
+if(USER_IS_LOGGEDIN && isset($_FILES['image'], $_POST['description'])){
+    $allow = array("jpg", "jpeg", "gif", "png");
 
-    die(var_dump($_POST['image']));
+    $upload_dir = __DIR__ . '/../../uploads/posts/';
 
-    $file_parts = pathinfo($_POST['image']);
-    $file_parts['extension'];
+    $file_extension = pathinfo($_FILES['image']['name'])['extension'];
 
-    // $image = filter_var();
-    $content = filter_var();
+    $file_name = hash("sha256", microtime(true) . $_FILES['image']['name']) . '.' . $file_extension;
 
-    $query = 'INSERT INTO posts (users_id, image, content) VALUES (:user_id, :image, :content);';
-    $stmt = $pdo->prepare($query);
-    $result = $stmt->execute($stmt, [
-        ':user_id' => User[id],
-        ':image' => '',
-        ':content' => ''
-    ]);
+    $upload_path = $upload_dir . $file_name;
 
-    if(!$result){
-        set_alert('Something went wrong, Please try again!', 'danger');
+    if ( in_array( $file_extension, $allow) ) { // is this file allowed
+        if ( move_uploaded_file($_FILES['image']['tmp_name'], $upload_path)) {
+
+            // the file has been moved correctly
+            $query = 'INSERT INTO posts (user_id, image, description) VALUES (:user_id, :image, :description);';
+            $params = [
+                ':user_id' => User['id'],
+                ':image' => $file_name,
+                ':description' => $_POST['description']
+            ];
+            $stmt = $pdo->prepare($query);
+
+            if(!$stmt){
+                die(var_dump($pdo->errorInfo()));
+            }
+
+            $result = $stmt->execute($params);
+
+            set_alert('Successfully uploaded post!', 'success');
+            redirect('/');
+        } else {
+
+            // the file wasn't moved correctly
+            set_alert('Something went wrong, please try again!', 'danger');
+            redirect('/');
+        }
+    } else {
+
+        // error this file ext is not allowed
+        set_alert("File extension <b>.$file_extension</b> not allowed. Allowed extensions: jpg, jpeg, gif, png", 'danger');
+        redirect('/');
     }
 
 }
