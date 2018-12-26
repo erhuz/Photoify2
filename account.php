@@ -1,4 +1,4 @@
-<?php $page = 'profile'; ?>
+<?php $page = 'account'; ?>
 
 <?php require __DIR__.'/views/header.php'; ?>
 

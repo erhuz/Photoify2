@@ -1,3 +1,5 @@
+<?php $page = 'post'; ?>
+
 <?php require __DIR__.'/views/header.php'; ?>
 
 <article class="row">
