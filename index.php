@@ -12,6 +12,7 @@
     $stmt = $pdo->prepare($query);
 
     if(!$stmt){
+ // REMOVE ME BEFORE PRODUCTION
         die(var_dump($pdo->errorInfo()));
     }
 
