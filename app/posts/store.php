@@ -7,6 +7,8 @@ require __DIR__.'/../autoload.php';
 // In this file we store/insert new posts in the database.
 
 if(USER_IS_LOGGEDIN && isset($_FILES['image'], $_POST['description'])){
+    $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
+
     $allow = array("jpg", "jpeg", "gif", "png");
 
     $upload_dir = __DIR__ . '/../../uploads/posts/';
@@ -25,12 +27,13 @@ if(USER_IS_LOGGEDIN && isset($_FILES['image'], $_POST['description'])){
             $params = [
                 ':user_id' => User['id'],
                 ':image' => $file_name,
-                ':description' => $_POST['description']
+                ':description' => $description
             ];
             $stmt = $pdo->prepare($query);
 
             if(!$stmt){
-                die(var_dump($pdo->errorInfo()));
+                set_alert('Something went wrong, please try again!', 'danger');
+                redirect('/');
             }
 
             $result = $stmt->execute($params);
