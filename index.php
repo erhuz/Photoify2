@@ -19,7 +19,7 @@
     $stmt->execute();
     $posts = $stmt->fetchAll();
 ?>
-<article id="post-container" class="row">
+<article class="row">
     <h1 class="col-12">
         <?= $config['title']; ?>
     </h1>
@@ -34,7 +34,7 @@
 
 </article>
 
-<article class="row">
+<article id="post-container" class="row">
     <?php foreach($posts as $post): ?>
         <?php require __DIR__.'/views/components/post.php'; ?>
     <?php endforeach; ?>
