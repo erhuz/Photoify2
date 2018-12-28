@@ -19,7 +19,7 @@
     $stmt->execute();
     $posts = $stmt->fetchAll();
 ?>
-<article class="row">
+<article id="post-container" class="row">
     <h1 class="col-12">
         <?= $config['title']; ?>
     </h1>
