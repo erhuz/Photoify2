@@ -1,7 +1,8 @@
 'use strict';
 
-// Scripts for the profile-page
 (function(){
+
+  // Scripts for the profile-page
   if(document.querySelector('.user-profile')){
     const clickableText            = document.querySelector('.user-profile .img-change');
     const innerProfileImgContainer = document.querySelector('.user-profile .profile-img-container .inner-profile-img-container');
@@ -22,6 +23,7 @@
     });
   }
 
+  // Scripts for the avatar submit form
   if(document.querySelector('.create-post-form')){
     const img = document.querySelector('#img-preview-input');
     const imgInput = document.querySelector('form.create-post-form input#image');
@@ -40,6 +42,62 @@
         window.URL.createObjectURL(imgInput.files[0])
         );
       }
+    });
+  }
+
+  // Scripts for posts
+  if(document.getElementById('post-container')){
+    const post_container = document.getElementById('post-container');
+    const posts = post_container.querySelectorAll('section');
+
+    posts.forEach((el) => {
+      const id = el.querySelector('.post').dataset.id;
+      const likeBtn = el.querySelector('.like');
+      const dislikeBtn = el.querySelector('.dislike');
+      const commentBtn = el.querySelector('.comment');
+
+      const likeAlert = el.querySelector('.like-alert');
+      const dislikeAlert = el.querySelector('.dislike-alert');
+      const commentAlert = el.querySelector('.comment-alert');
+
+
+
+      likeBtn.addEventListener('click', (event) => {
+        fetch(`/api/like.php?id=${id}&status=1`)
+        .then(res => res.json())
+        .then(json => {
+          console.log(json);
+          if(json.result === false){
+            console.log("It's false...");
+            likeAlert.style.display = 'initial';
+          }else{
+            likeBtn.classList.add('active');
+          }
+        });
+      });
+
+      dislikeBtn.addEventListener('click', (event) => {
+        fetch(`/api/like.php?id=${id}&status=0`)
+        .then(res => res.json())
+        .then(json => {
+          console.log(json);
+          if(json.result === false){
+            console.log("It's false...");
+            dislikeAlert.style.display = 'initial';
+          }else{
+            dislikeBtn.classList.add('active');
+          }
+        });
+      });
+
+      commentBtn.addEventListener('click', (event) => {
+        fetch(`/api/like.php?id=${id}&status=0`)
+        .then(res => res.json())
+        .then(json => {
+          console.log(json);
+          commentAlert.style.display = 'initial';
+        });
+      });
     });
   }
 })();
