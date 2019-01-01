@@ -17,7 +17,7 @@ $query = 'SELECT
     FROM posts
     JOIN users ON posts.user_id = users.id
     LEFT OUTER JOIN likes ON posts.id = likes.post_id
-    -- GROUP BY posts.id, users.id
+    GROUP BY posts.id, users.id, likes.status
     ORDER BY posts.created_at DESC;';
 
     $stmt = $pdo->prepare($query);
