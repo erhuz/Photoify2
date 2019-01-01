@@ -16,11 +16,10 @@ $post_id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
 $status = filter_var($_GET['status'], FILTER_SANITIZE_NUMBER_INT);
 
 // Check if row exists in table.
-$query = 'SELECT 1 FROM likes WHERE post_id = :post_id AND user_id = :user_id; AND status=:status';
+$query = 'SELECT 1 FROM likes WHERE post_id = :post_id AND user_id = :user_id;';
 $params = [
     ':post_id' => $post_id,
-    ':user_id' => User['id'],
-    ':status' => $status
+    ':user_id' => User['id']
 ];
 
 $stmt = $pdo->prepare($query);
