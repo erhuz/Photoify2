@@ -150,3 +150,10 @@ $iconic-gradient: linear-gradient(135deg, #1c5d8e 0%,#863589 50%,#d63b5d 100%);
 .display-none{
     display: none;
 }
+
+
+// post like, dislike & comment alerts
+.like-alert, .dislike-alert, .comment-alert{
+    display: none;
+    margin: 0;
+}

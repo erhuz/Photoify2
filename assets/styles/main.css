@@ -165,4 +165,9 @@
 .display-none {
   display: none;
 }
+
+.like-alert, .dislike-alert, .comment-alert {
+  display: none;
+  margin: 0;
+}
 /*# sourceMappingURL=main.css.map */
