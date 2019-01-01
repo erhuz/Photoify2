@@ -1,18 +1,20 @@
 <section class="col-md-10 col-lg-6">
-    <div class="row post">
+    <div class="row post" data-id="<?= $post_id ?>">
         <div class="col">
             <div class="card">
 
                 <div class="card-header">
                     <div class="profile-picture-container">
-                        <img class="profile-picture rounded-circle" src="<?= '/uploads/avatars/' . $post['avatar'] ?>"
+                        <img class="profile-picture rounded-circle" src="<?= get_image($user_avatar, 'avatar') ?>"
                             alt="">
                     </div>
-                    <h5 class="card-title"><a href="<?= '/posts.php?user=' . $post['user_id'] ?>">
-                            <?= $post['name'] ?></a></h5>
+                    <h5 class="card-title">
+                        <a href="<?= '/posts.php?user=' . $user_id ?>">
+                            <?= $user_name ?>
+                        </a>
+                    </h5>
                 </div>
-
-                <?php if($post['user_id'] === User['id']): ?>
+                <?php if(USER_IS_LOGGEDIN && $user_id === User['id']): ?>
                 <div class="container">
                     <div class="row">
                         <button type="button" class="delete btn btn-danger btn-sm rounded-0 col-6"><i class="fa fa-trash-o"
@@ -24,36 +26,49 @@
                 <?php endif; ?>
 
                 <div class="card-image">
-                    <img src="<?= '/uploads/posts/' . $post['image'] ?>" alt="<?= $post['description'] ?>">
+                    <img src="<?= get_image($post_image, 'post') ?>" alt="<?= $post_description ?>">
                 </div>
 
                 <div class="container">
                     <div class="row">
-                        <button type="button" class="like btn btn-light rounded-0 col-6"><i class="fa fa-thumbs-o-up"
-                                aria-hidden="true"></i> Like</button>
-                        <button type="button" class="dislike btn btn-light rounded-0 col-6"><i class="fa fa-thumbs-o-down"
-                                aria-hidden="true"></i> Dislike</button>
+                        <button type="button" class="like btn btn-primary rounded-0 col-4"><i class="fa fa-thumbs-o-up"
+                                aria-hidden="true"></i> <?= $likeCount ?></button>
+                        <button type="button" class="dislike btn btn-primary rounded-0 col-4"><i class="fa fa-thumbs-o-down"
+                                aria-hidden="true"></i> <?= $dislikeCount ?></button>
+                        <button type="button" class="comment btn btn-primary rounded-0 col-4"><i class="fa fa-comment-o"
+                                aria-hidden="true"></i> commentCount</button>
+                    </div>
+                </div>
+
+                <div class="container text-white bg-danger">
+                    <div class="row like-alert">
+                        <div class="col">
+                            <p class="my-2">Please <a class="text-white" href="/login.php"><U>log in</U></a> to like a post.</p>
+                        </div>
+                    </div>
+                    <div class="row dislike-alert">
+                        <div class="col">
+                            <p class="my-2">Please <a class="text-white" href="/login.php"><U>log in</U></a> to dislike a post.</p>
+                        </div>
+                    </div>
+                    <div class="row comment-alert">
+                        <div class="col">
+                            <p class="my-2">Please <a class="text-white" href="/login.php"><U>log in</U></a> to comment.</p>
+                        </div>
                     </div>
                 </div>
 
                 <div class="card-body">
                     <div class="card-text">
                         <p class="mb-0">
-                            <?= $post['description'] ?>
+                            <?= $post_description ?>
                         </p>
                     </div>
                 </div>
 
                 <div class="card-footer text-muted">
-                    <div class="row">
-                        <div class="col-8">
-                            Uploaded:
-                            <?= $post['created_at'] ?>
-                        </div>
-                        <div class="col text-right">
-                            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i> 31
-                        </div>
-                    </div>
+                    Upload date:
+                    <?= $post_created_at ?>
                 </div>
 
             </div>
