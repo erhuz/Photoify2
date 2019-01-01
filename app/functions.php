@@ -52,3 +52,20 @@ if (!function_exists('get_alerts')) {
     unset($_SESSION['alerts']);
     }
 }
+
+if(!function_exists('create_post')){
+    function create_post(
+        Int $post_id,
+        String $post_image,
+        String $post_description,
+        String $post_created_at,
+        Int $user_id,
+        String $user_name,
+        String $user_avatar,
+        Int $likeCount,
+        Int $dislikeCount
+    )
+    {
+        require __DIR__.'/../views/components/post.php';
+    }
+}
