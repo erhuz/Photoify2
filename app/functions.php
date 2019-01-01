@@ -69,3 +69,18 @@ if(!function_exists('create_post')){
         require __DIR__.'/../views/components/post.php';
     }
 }
+
+if(!function_exists('get_image')){
+    function get_image(
+        String $image,
+        String $type
+    )
+    {
+        if(strtolower($type) == 'avatar'){
+            return '/../uploads/avatars/' . $image;
+        }elseif(strtolower($type) == 'post'){
+            return '/../uploads/posts/' . $image;
+        }
+        return 'THAWIFNOWFNOIF';
+    }
+}
