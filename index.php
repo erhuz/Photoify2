@@ -3,11 +3,22 @@
 <?php require __DIR__.'/views/header.php'; ?>
 
 <?php
-    $query = 'SELECT posts.id, user_id, posts.image, posts.description, posts.created_at, users.name, users.avatar
+$query = 'SELECT
+        posts.id,
+        posts.user_id,
+        posts.image,
+        posts.description,
+        posts.created_at,
+        users.name,
+        users.avatar,
+        ifnull((SELECT COUNT(likes.status) WHERE likes.status = 1), 0 ) as likeCount,
+        ifnull((SELECT COUNT(likes.status) WHERE likes.status = 0), 0 ) as dislikeCount
+
     FROM posts
     JOIN users ON posts.user_id = users.id
-    ORDER BY posts.created_at DESC;
-    ';
+    LEFT OUTER JOIN likes ON posts.id = likes.post_id
+    -- GROUP BY posts.id, users.id
+    ORDER BY posts.created_at DESC;';
 
     $stmt = $pdo->prepare($query);
 
@@ -17,8 +28,12 @@
     }
 
     $stmt->execute();
-    $posts = $stmt->fetchAll();
+$posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+
+<pre>
+    <?php print_r($posts); ?>
+</pre>
 <article class="row">
     <h1 class="col-12">
         <?= $config['title']; ?>
@@ -27,7 +42,7 @@
 
     <?php if(USER_IS_LOGGEDIN): ?>
     <div class="col-12">
-        <a href="/post.php" class="mr-2 btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Create Post</button>
+        <a href="/post.php" class="mr-2 btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Create Post</a>
         <a href="#" class="mr-2 btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i> Manage Posts</a>
     </div>
     <?php endif; ?>
@@ -36,7 +51,20 @@
 
 <article id="post-container" class="row">
     <?php foreach($posts as $post): ?>
-        <?php require __DIR__.'/views/components/post.php'; ?>
+
+        <?php
+            create_post(
+                $post['id'],
+                $post['image'],
+                $post['description'],
+                $post['created_at'],
+                $post['user_id'],
+                $post['name'],
+                $post['avatar'],
+                $post['likeCount'],
+                $post['dislikeCount']
+            );
+        ?>
     <?php endforeach; ?>
 </article>
 
