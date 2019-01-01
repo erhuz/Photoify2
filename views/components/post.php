@@ -31,11 +31,11 @@
 
                 <div class="container">
                     <div class="row">
-                        <button type="button" class="like btn btn-primary rounded-0 col-4"><i class="fa fa-thumbs-o-up"
+                        <button type="button" class="like btn btn-primary m-2 col"><i class="fa fa-thumbs-o-up"
                                 aria-hidden="true"></i> <?= $likeCount ?></button>
-                        <button type="button" class="dislike btn btn-primary rounded-0 col-4"><i class="fa fa-thumbs-o-down"
+                        <button type="button" class="dislike btn btn-primary m-2 col"><i class="fa fa-thumbs-o-down"
                                 aria-hidden="true"></i> <?= $dislikeCount ?></button>
-                        <button type="button" class="comment btn btn-primary rounded-0 col-4"><i class="fa fa-comment-o"
+                        <button type="button" class="comment btn btn-primary m-2 col"><i class="fa fa-comment-o"
                                 aria-hidden="true"></i> commentCount</button>
                     </div>
                 </div>
