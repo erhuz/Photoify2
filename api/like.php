@@ -3,6 +3,14 @@ declare (strict_types = 1);
 
 require __DIR__.'/../app/autoload.php';
 
+/** PSUEDO
+ *  Check if row exists w/status
+ *      if status === inputStatus
+ *          remove row
+ *      if status !== inputStatus
+ *          update row w/ new status
+*/
+
 // In this file we like posts and send the data back as encoded JSON.
 if(!USER_IS_LOGGEDIN){
     $data = ['result' => false];
@@ -27,6 +35,13 @@ $stmt->execute($params);
 $results = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if(isset($results[1])){
+    if($status !== $results[1]){
+        $data = ['result' => 'conflict'];
+
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        die;
+    }
     $liked = true;
 }else{
     $liked = false;
