@@ -61,7 +61,7 @@
       const commentAlert = el.querySelector('.comment-alert');
 
 
-
+      // When like btn is clicked
       likeBtn.addEventListener('click', (event) => {
         fetch(`/api/like.php?id=${id}&status=1`)
         .then(res => res.json())
@@ -76,8 +76,9 @@
         });
       });
 
+      // When dislike btn is clicked
       dislikeBtn.addEventListener('click', (event) => {
-        fetch(`/api/like.php?id=${id}&status=0`)
+        fetch(`/api/like.php?id=${id}&status=2`)
         .then(res => res.json())
         .then(json => {
           console.log(json);
@@ -90,6 +91,7 @@
         });
       });
 
+      // When comment btn is clicked
       commentBtn.addEventListener('click', (event) => {
         fetch(`/api/like.php?id=${id}&status=0`)
         .then(res => res.json())
