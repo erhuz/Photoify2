@@ -32,13 +32,13 @@ CREATE TABLE comments (
     FOREIGN KEY(post_id) REFERENCES posts(id)
 );
 
--- Table: likes
-CREATE TABLE likes (
+-- Table: reactions
+CREATE TABLE reactions (
     user_id INTEGER NOT NULL,
     post_id INTEGER NOT NULL,
     status INTEGER NOT NULL,
     created_at TIMESTAMP DATETIME DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT likes_pk PRIMARY KEY (user_id,post_id)
+    CONSTRAINT reactions_pk PRIMARY KEY (user_id,post_id)
     FOREIGN KEY(user_id) REFERENCES users(id)
     FOREIGN KEY(post_id) REFERENCES posts(id)
 );
