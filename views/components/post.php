@@ -5,16 +5,39 @@
 
                 <div class="card-header">
                     <div class="profile-picture-container">
-                        <img class="profile-picture rounded-circle" src="<?= get_image($user_avatar, 'avatar') ?>"
-                            alt="">
+                        <img class="profile-picture rounded-circle" src="<?= get_image($user_avatar, 'avatar') ?>" alt="">
                     </div>
                     <h5 class="card-title">
-                        <a href="<?= '/posts.php?user=' . $user_id ?>">
+                        <a href="<?= '/users.php?id=' . $user_id ?>">
                             <?= $user_name ?>
                         </a>
                     </h5>
                 </div>
-                <?php if(USER_IS_LOGGEDIN && $user_id === User['id']): ?>
+                <?php if(USER_IS_LOGGEDIN && intval($user_id) === intval(User['id'])): ?>
+
+                <!-- Modal -->
+                <div class="custom_modal">
+                    <div class="container mt-4 p-4 modal-content">
+                        <div class="row">
+
+                            <!-- Modal content -->
+                            <div class="col-12">
+                                <span class="close-btn close">&times;</span>
+                                <h3>Warning!</h3>
+                                <p>Are you sure you want to delete this post?<br>
+                                    This action <b>CANNOT</b> be undone!</p>
+                            </div>
+
+                            <div class="col-6">
+                                <a href="/app/posts/delete.php?id=<?= $post_id ?>" class="btn btn-block btn-danger text-white">DELETE</a>
+                            </div>
+                            <div class="col-6">
+                                <button class="close-btn btn btn-block btn-outline-secondary">CANCEL</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
                 <div class="container">
                     <div class="row">
                         <button type="button" class="delete btn btn-danger btn-sm rounded-0 col-6"><i class="fa fa-trash-o"
@@ -32,9 +55,11 @@
                 <div class="container">
                     <div class="row">
                         <button type="button" class="like btn btn-primary m-2 col"><i class="fa fa-thumbs-o-up"
-                                aria-hidden="true"></i> <span><?= $likeCount ?></span></button>
+                                aria-hidden="true"></i> <span>
+                                <?= $likeCount ?></span></button>
                         <button type="button" class="dislike btn btn-primary m-2 col"><i class="fa fa-thumbs-o-down"
-                                aria-hidden="true"></i> <span><?= $dislikeCount ?></span></button>
+                                aria-hidden="true"></i> <span>
+                                <?= $dislikeCount ?></span></button>
                         <button type="button" class="comment btn btn-primary m-2 col"><i class="fa fa-comment-o"
                                 aria-hidden="true"></i> <span>commentCount</span></button>
                     </div>
@@ -43,17 +68,20 @@
                 <div class="container text-white bg-danger">
                     <div class="row like-alert">
                         <div class="col">
-                            <p class="my-2">Please <a class="text-white" href="/login.php"><U>log in</U></a> to like a post.</p>
+                            <p class="my-2">Please <a class="text-white" href="/login.php"><U>log in</U></a> to like a
+                                post.</p>
                         </div>
                     </div>
                     <div class="row dislike-alert">
                         <div class="col">
-                            <p class="my-2">Please <a class="text-white" href="/login.php"><U>log in</U></a> to dislike a post.</p>
+                            <p class="my-2">Please <a class="text-white" href="/login.php"><U>log in</U></a> to dislike
+                                a post.</p>
                         </div>
                     </div>
                     <div class="row comment-alert">
                         <div class="col">
-                            <p class="my-2">Please <a class="text-white" href="/login.php"><U>log in</U></a> to comment.</p>
+                            <p class="my-2">Please <a class="text-white" href="/login.php"><U>log in</U></a> to
+                                comment.</p>
                         </div>
                     </div>
                 </div>
