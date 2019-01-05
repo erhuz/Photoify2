@@ -32,11 +32,11 @@
                 <div class="container">
                     <div class="row">
                         <button type="button" class="like btn btn-primary m-2 col"><i class="fa fa-thumbs-o-up"
-                                aria-hidden="true"></i> <?= $likeCount ?></button>
+                                aria-hidden="true"></i> <span><?= $likeCount ?></span></button>
                         <button type="button" class="dislike btn btn-primary m-2 col"><i class="fa fa-thumbs-o-down"
-                                aria-hidden="true"></i> <?= $dislikeCount ?></button>
+                                aria-hidden="true"></i> <span><?= $dislikeCount ?></span></button>
                         <button type="button" class="comment btn btn-primary m-2 col"><i class="fa fa-comment-o"
-                                aria-hidden="true"></i> commentCount</button>
+                                aria-hidden="true"></i> <span>commentCount</span></button>
                     </div>
                 </div>
 
