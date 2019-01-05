@@ -47,6 +47,26 @@
 
   // Scripts for posts
   if(document.getElementById('post-container')){
+    const processReaction = (baseBtn, oppositeBtn, response) => {
+      if(response.result === false){
+        return false;
+      }
+
+      if(response.change === 'add'){
+        baseBtn.querySelector('span').innerHTML++;
+        return true;
+
+      }else if(response.change === 'remove'){
+        baseBtn.querySelector('span').innerHTML--;
+        return true;
+
+      }else if(response.change === 'switch'){
+        baseBtn.querySelector('span').innerHTML++;
+        oppositeBtn.querySelector('span').innerHTML--;
+        return true;
+      }
+    }
+
     const post_container = document.getElementById('post-container');
     const posts = post_container.querySelectorAll('section');
 
@@ -66,13 +86,8 @@
         fetch(`/api/reaction.php?id=${id}&status=1`)
         .then(res => res.json())
         .then(json => {
-          console.log(json);
-          if(json.result === false){
-            console.log("It's false...");
-            likeAlert.style.display = 'initial';
-          }else{
-            likeBtn.classList.add('active');
-          }
+          processReaction(likeBtn, dislikeBtn, json);
+
         });
       });
 
@@ -81,13 +96,7 @@
         fetch(`/api/reaction.php?id=${id}&status=2`)
         .then(res => res.json())
         .then(json => {
-          console.log(json);
-          if(json.result === false){
-            console.log("It's false...");
-            dislikeAlert.style.display = 'initial';
-          }else{
-            dislikeBtn.classList.add('active');
-          }
+          processReaction(dislikeBtn, likeBtn, json);
         });
       });
 
