@@ -1,8 +1,8 @@
-<?php $page = 'post';
+<?php $page = 'post'; ?>
 
-require __DIR__.'/../views/header.php';
+<?php require __DIR__.'/../views/header.php'; ?>
 
-
+<?php
 if(!isset($_GET['id'])){
     set_alert('ID missing, unable to edit post.', 'warning');
     redirect('/');
