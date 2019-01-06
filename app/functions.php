@@ -81,6 +81,5 @@ if(!function_exists('get_image')){
         }elseif(strtolower($type) == 'post'){
             return '/../uploads/posts/' . $image;
         }
-        return 'THAWIFNOWFNOIF';
     }
 }
