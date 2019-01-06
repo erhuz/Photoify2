@@ -1,21 +1,30 @@
-<?php $page = 'post'; ?>
+<?php $page = 'post';
 
-<?php require __DIR__.'/../views/header.php'; ?>
+require __DIR__.'/../views/header.php';
 
-<?php
+
+if(!isset($_GET['id'])){
+    set_alert('ID missing, unable to edit post.', 'warning');
+    redirect('/');
+}
+
 $post_id = intval(filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT));
 
-$query = 'SELECT id, image, description FROM posts WHERE id=:id';
-$params = [':id' => $post_id];
+$query = 'SELECT id, image, description FROM posts WHERE id=:id AND user_id=:user_id';
+$params = [
+    ':id' => $post_id,
+    ':user_id' => User['id']
+];
 
 $stmt = $pdo->prepare($query);
-if(!$stmt){
-// REMOVE ME BEFORE PRODUCTION
-    die(var_dump($pdo->errorInfo()));
-}
 
 $stmt->execute($params);
 $post = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if(!$post){
+    set_alert('This post doesn\'t appear to exist', 'warning');
+    redirect('/');
+}
 ?>
 
 <article class="row">
@@ -53,7 +62,7 @@ $post = $stmt->fetch(PDO::FETCH_ASSOC);
             </form>
         </div>
     </section>
-
 </article>
+
 
 <?php require __DIR__.'/../views/footer.php'; ?>
