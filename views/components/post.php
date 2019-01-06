@@ -9,7 +9,7 @@
                         <img class="profile-picture rounded-circle" src="<?= get_image($user_avatar, 'avatar') ?>" alt="">
                     </div>
                     <h5 class="card-title">
-                        <a href="<?= '/users.php?id=' . $user_id ?>">
+                        <a href="<?= '/profile.php?id=' . $user_id ?>">
                             <?= $user_name ?>
                         </a>
                     </h5>
@@ -66,7 +66,7 @@
                                 aria-hidden="true"></i> <span>
                                 <?= $dislikeCount ?></span></button>
                         <button type="button" class="comment btn btn-primary m-2 col"><i class="fa fa-comment-o"
-                                aria-hidden="true"></i> <span>commentCount</span></button>
+                                aria-hidden="true"></i> <span>Disabled</span></button>
                     </div>
                 </div>
 
@@ -95,9 +95,12 @@
                 <!-- Post description -->
                 <div class="card-body">
                     <div class="card-text">
-                        <p class="mb-0">
-                            <?= $post_description ?>
-                        </p>
+                        <h6 class="text-muted">Description</h6>
+                        <div class="p-3 border border-info rounded">
+                            <p class="mb-0">
+                                <?= str_replace(PHP_EOL, '<br>', $post_description) ?>
+                            </p>
+                        </div>
                     </div>
                 </div>
 
