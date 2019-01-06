@@ -115,6 +115,7 @@
       if (post.querySelector('button.delete')) {
         const deleteBtn = post.querySelector('button.delete');
         const modal = post.querySelector('.custom_modal');
+
         deleteBtn.addEventListener('click', () => {
 
           modal.style.display = 'initial';
@@ -123,9 +124,11 @@
               modal.style.display = 'none';
             });
           });
+
         });
       }
 
     });
+
   }
 })();
