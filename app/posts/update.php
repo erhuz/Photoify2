@@ -58,8 +58,8 @@ if(strlen($_FILES['image']['tmp_name']) > 1){
 
     $stmt = $pdo->prepare($query);
     if ($stmt->execute($params)) {
-        $current_img = $stmt->fetch(PDO::FETCH_ASSOC);
-
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $current_img = $result['image'];
 
         if (in_array($file_extension, $allow)) { // if this file extension allowed
             if (move_uploaded_file($_FILES['image']['tmp_name'], $upload_path)) { // try to move file
