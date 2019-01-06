@@ -20,14 +20,9 @@ $query = 'SELECT
     GROUP BY posts.id, users.id, reactions.status
     ORDER BY posts.created_at DESC;';
 
-    $stmt = $pdo->prepare($query);
+$stmt = $pdo->prepare($query);
 
-    if(!$stmt){
- // REMOVE ME BEFORE PRODUCTION
-        die(var_dump($pdo->errorInfo()));
-    }
-
-    $stmt->execute();
+$stmt->execute();
 $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <article class="row">

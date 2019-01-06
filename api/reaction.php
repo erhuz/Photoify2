@@ -48,12 +48,6 @@ $params = [
 ];
 $stmt = $pdo->prepare($query);
 
-// Check for statemen errors
-if(!$stmt){
-    // REMOVE ME BEFORE PRODUCTION
-    die(var_dump($pdo->errorInfo()));
-}
-
 // Check if execution was valid
 if(!$stmt->execute($params)){
     $data = ['result' => ['error' => 'Query did not execute propperly.']];
@@ -117,12 +111,6 @@ if(!$result){ // Check if result returned false
 
 // Prepare query
 $stmt = $pdo->prepare($query);
-
-// Check for statemen errors
-if(!$stmt){
-    // REMOVE ME BEFORE PRODUCTION
-    die(var_dump($pdo->errorInfo()));
-}
 
 // Check if execution was valid
 if(!$stmt->execute($params)){
