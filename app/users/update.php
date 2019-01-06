@@ -69,13 +69,9 @@ if(USER_IS_LOGGEDIN && isset($_POST['password'], $_POST['c_password'])){
 if(USER_IS_LOGGEDIN && isset($_FILES['avatar'])){
     // Allowed file extensions
     $allow = array("jpg", "jpeg", "gif", "png");
-
     $upload_dir = __DIR__ . '/../../uploads/avatars/';
-
     $file_extension = pathinfo($_FILES['avatar']['name'])['extension'];
-
     $file_name = hash("sha256", microtime(true) . $_FILES['avatar']['name']) . '.' . $file_extension;
-
     $upload_path = $upload_dir . $file_name;
 
     if ( in_array( $file_extension, $allow) ) { // is this file allowed
