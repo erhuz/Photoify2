@@ -3,6 +3,7 @@
         <div class="col">
             <div class="card">
 
+                <!-- User header -->
                 <div class="card-header">
                     <div class="profile-picture-container">
                         <img class="profile-picture rounded-circle" src="<?= get_image($user_avatar, 'avatar') ?>" alt="">
@@ -15,7 +16,7 @@
                 </div>
                 <?php if(USER_IS_LOGGEDIN && intval($user_id) === intval(User['id'])): ?>
 
-                <!-- Modal -->
+                <!-- Delete-modal -->
                 <div class="custom_modal">
                     <div class="container mt-4 p-4 modal-content">
                         <div class="row">
@@ -38,20 +39,24 @@
                     </div>
 
                 </div>
+
+                <!-- Post modification buttons -->
                 <div class="container">
                     <div class="row">
                         <button type="button" class="delete btn btn-danger btn-sm rounded-0 col-6"><i class="fa fa-trash-o"
                                 aria-hidden="true"></i> Delete</button>
-                        <button type="button" class="edit btn btn-warning btn-sm rounded-0 col-6"><i class="fa fa-pencil-square-o"
-                                aria-hidden="true"></i> Edit</button>
+                        <a href="/post/edit.php?id=<?= $post_id ?>" class="edit btn btn-warning btn-sm rounded-0 col-6"><i class="fa fa-pencil-square-o"
+                                aria-hidden="true"></i> Edit</a>
                     </div>
                 </div>
                 <?php endif; ?>
 
+                <!-- Post image -->
                 <div class="card-image">
                     <img src="<?= get_image($post_image, 'post') ?>" alt="<?= $post_description ?>">
                 </div>
 
+                <!-- Reaction buttons -->
                 <div class="container">
                     <div class="row">
                         <button type="button" class="like btn btn-primary m-2 col"><i class="fa fa-thumbs-o-up"
@@ -65,6 +70,7 @@
                     </div>
                 </div>
 
+                <!-- Reaction alerts -->
                 <div class="container text-white bg-danger">
                     <div class="row like-alert">
                         <div class="col">
@@ -86,6 +92,7 @@
                     </div>
                 </div>
 
+                <!-- Post description -->
                 <div class="card-body">
                     <div class="card-text">
                         <p class="mb-0">
@@ -94,6 +101,7 @@
                     </div>
                 </div>
 
+                <!-- Upload date / footer -->
                 <div class="card-footer text-muted">
                     Upload date:
                     <?= $post_created_at ?>
