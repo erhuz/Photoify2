@@ -30,10 +30,6 @@ $query = 'SELECT
     $stmt->execute();
 $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
-<pre>
-    <?php print_r($posts); ?>
-</pre>
 <article class="row">
     <h1 class="col-12">
         <?= $config['title']; ?>
@@ -43,7 +39,7 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php if(USER_IS_LOGGEDIN): ?>
     <div class="col-12">
         <a href="/post/new.php" class="mr-2 btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Create Post</a>
-        <a href="/users.php?id=<?= User['id'] ?>" class="mr-2 btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i> Manage Posts</a>
+        <a href="/profile.php?id=<?= User['id'] ?>" class="mr-2 btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i> Manage Posts</a>
     </div>
     <?php endif; ?>
 
