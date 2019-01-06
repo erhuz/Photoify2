@@ -67,8 +67,8 @@ if(USER_IS_LOGGEDIN && isset($_POST['password'], $_POST['c_password'])){
 
 // Change avatar
 if(USER_IS_LOGGEDIN && isset($_FILES['avatar'])){
-    // Allowed file extensions
-    $allow = array("jpg", "jpeg", "gif", "png");
+    // Setup variables for file upload
+    $allow = array("jpg", "jpeg", "gif", "png"); // Allowed file extensions
     $upload_dir = __DIR__ . '/../../uploads/avatars/';
     $file_extension = pathinfo($_FILES['avatar']['name'])['extension'];
     $file_name = hash("sha256", microtime(true) . $_FILES['avatar']['name']) . '.' . $file_extension;
