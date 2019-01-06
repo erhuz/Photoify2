@@ -34,7 +34,7 @@ $post = $stmt->fetch(PDO::FETCH_ASSOC);
     <section class="row justify-content-center">
         <div class="col-md-6">
             <form class="create-post-form" action="/app/posts/update.php" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="post_id">
+                <input type="hidden" name="post_id" value="<?= $post_id ?>">
                 <label class="mt-4 display-none" for="image">Picture</label>
                 <input class="display-none" type="file" name="image" id="image">
                 <label class="mt-4" for="content">Description</label>
