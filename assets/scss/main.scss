@@ -158,6 +158,11 @@ $iconic-gradient: linear-gradient(135deg, #1c5d8e 0%,#863589 50%,#d63b5d 100%);
     margin: 0;
 }
 
+// Gradient background
+.icondic-gradient-bg{
+    background   : $iconic-gradient;
+}
+
 
 // custom_modal styling
 .custom_modal {
@@ -172,29 +177,29 @@ $iconic-gradient: linear-gradient(135deg, #1c5d8e 0%,#863589 50%,#d63b5d 100%);
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 
-        /* custom_modal Content/Box */
-        .custom_modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 2px;
-            border: 1px solid #888;
-            width: 80%; /* Could be more or less, depending on screen size */
-        }
+    /* custom_modal Content/Box */
+    .custom_modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 2px;
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+    }
 
-        /* The Close Button */
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
+    /* The Close Button */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
 
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
 }
 
 
