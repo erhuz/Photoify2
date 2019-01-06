@@ -151,6 +151,27 @@ $iconic-gradient: linear-gradient(135deg, #1c5d8e 0%,#863589 50%,#d63b5d 100%);
     display: none;
 }
 
+// Profile styling (public profiles)
+.profile{
+    header{
+        .profile-img{
+            width: 100%;
+        }
+
+        .flex-center{
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1{
+            margin: 0;
+            font-size: 3.4rem;
+            text-align: center;
+        }
+    }
+
+}
+
 
 // post like, dislike & comment alerts
 .like-alert, .dislike-alert, .comment-alert{
