@@ -17,11 +17,11 @@ $query = "SELECT
         users.bio,
         users.avatar,
         users.created_at,
-        ifnull((SELECT COUNT(reactions.status) WHERE reactions.status = 1), 0 ) as likeCount,
-        ifnull((SELECT COUNT(reactions.status) WHERE reactions.status = 2), 0 ) as dislikeCount
+        (SELECT COUNT(reactions.status) WHERE reactions.status = 1) as likeCount,
+        (SELECT COUNT(reactions.status) WHERE reactions.status = -1) as dislikeCount
 
     FROM users
-    JOIN reactions ON reactions.user_id = users.id
+    LEFT OUTER JOIN reactions ON reactions.user_id = users.id
     WHERE users.id = :id
     GROUP BY users.id;";
 
@@ -59,7 +59,7 @@ $query = 'SELECT
         users.name,
         users.avatar,
         ifnull((SELECT COUNT(reactions.status) WHERE reactions.status = 1), 0 ) as likeCount,
-        ifnull((SELECT COUNT(reactions.status) WHERE reactions.status = 2), 0 ) as dislikeCount
+        ifnull((SELECT COUNT(reactions.status) WHERE reactions.status = -1), 0 ) as dislikeCount
 
     FROM posts
     JOIN users ON posts.user_id = users.id AND users.id = :id
