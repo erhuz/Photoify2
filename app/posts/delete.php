@@ -25,4 +25,4 @@ if(!$stmt->execute($params)){
 }
 
 set_alert('Post successfully deleted.', 'warning');
-redirect('/users?id=' . User['id']);
+redirect('/profile.php?id=' . User['id']);
