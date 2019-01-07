@@ -84,7 +84,7 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </header>
 
     <article class="row mt-4 mx-0 d-flex justify-content-center">
-        <div class="col">
+        <div class="col pl-0">
             <div class="col-sm-12 m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Biography<br><br></b> <?= $user['bio']; ?></div>
         </div>
         <div class="col">
