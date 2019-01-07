@@ -17,7 +17,7 @@ $query = 'SELECT
     FROM posts
     JOIN users ON posts.user_id = users.id
     LEFT OUTER JOIN reactions ON posts.id = reactions.post_id
-    GROUP BY posts.id, users.id, reactions.status
+    GROUP BY posts.id
     ORDER BY posts.created_at DESC;';
 
 $stmt = $pdo->prepare($query);
@@ -39,6 +39,7 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php endif; ?>
 
 </article>
+
 
 <article id="post-container" class="row">
     <?php foreach($posts as $post): ?>
