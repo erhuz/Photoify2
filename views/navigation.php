@@ -24,7 +24,7 @@
                     <?= User['name'] ?>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/account.php"><i class="fa fa-user-circle-o" aria-hidden="true"></i> My profile</a>
+                    <a class="dropdown-item" href="/profile.php?id=<?= User['id'] ?>"><i class="fa fa-user-circle-o" aria-hidden="true"></i> My profile</a>
                     <a class="dropdown-item" href="/account.php"><i class="fa fa-cog" aria-hidden="true"></i> My account</a>
                     <a class="dropdown-item" href="/app/users/logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i> Log out</a>
                 </div>
