@@ -1,7 +1,7 @@
 <section class="col-md-10 col-lg-6">
     <div class="row post" data-id="<?= $post_id ?>">
         <div class="col">
-            <div class="card">
+            <div class="card shadow-sm">
 
                 <!-- User header -->
                 <div class="card-header">
