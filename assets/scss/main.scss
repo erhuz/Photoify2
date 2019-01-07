@@ -156,6 +156,7 @@ $iconic-gradient: linear-gradient(135deg, #1c5d8e 0%,#863589 50%,#d63b5d 100%);
     header{
         .profile-img{
             width: 100%;
+            border: 4px solid #332;
         }
 
         .flex-center{
@@ -169,7 +170,9 @@ $iconic-gradient: linear-gradient(135deg, #1c5d8e 0%,#863589 50%,#d63b5d 100%);
             text-align: center;
         }
     }
-
+    h2{
+        margin-bottom: 0px;
+    }
 }
 
 
