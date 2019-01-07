@@ -84,11 +84,13 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </header>
 
     <article class="row mt-4 mx-0 d-flex justify-content-center">
+        <?php if(strlen($user['bio']) > 0): ?>
         <div class="col">
-        <div class="row">
-            <div class="col-sm-12 m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Biography<br><br></b> <?= $user['bio']; ?></div>
+            <div class="row">
+                <div class="col-sm-12 m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Biography<br><br></b> <?= $user['bio']; ?></div>
+            </div>
         </div>
-    </div>
+        <?php endif; ?>
         <div class="col-md-12">
             <div class="row d-flex justify-content-center">
                 <div class="col white-space-nowrap m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Joined:</b> <?= $joined_date ?></div>
