@@ -96,9 +96,9 @@
                 <div class="card-body">
                     <div class="card-text">
                         <h6 class="text-muted">Description</h6>
-                        <div class="p-3 border border-info rounded">
+                        <div class="p-2 pl-3 border border-info rounded">
                             <p class="mb-0">
-                                <?= str_replace(PHP_EOL, '<br>', $post_description) ?>
+                                <?= str_replace(PHP_EOL, '<br>', str_replace(' ', '&nbsp', $post_description)) ?>
                             </p>
                         </div>
                     </div>

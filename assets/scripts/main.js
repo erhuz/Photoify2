@@ -47,27 +47,6 @@
 
   // Scripts for posts
   if (document.getElementById('post-container')) {
-    const processReaction = (baseBtn, baseAlert, oppositeBtn, response) => {
-      if (response.result === false) {
-        baseAlert.style.display = 'initial';
-        return false;
-      }
-
-      if (response.change === 'add') {
-        baseBtn.querySelector('span').innerHTML++;
-        return true;
-
-      } else if (response.change === 'remove') {
-        baseBtn.querySelector('span').innerHTML--;
-        return true;
-
-      } else if (response.change === 'switch') {
-        baseBtn.querySelector('span').innerHTML++;
-        oppositeBtn.querySelector('span').innerHTML--;
-        return true;
-      }
-    }
-
     const post_container = document.getElementById('post-container');
     const posts = post_container.querySelectorAll('section');
 
@@ -81,29 +60,46 @@
       const dislikeAlert = post.querySelector('.dislike-alert');
       const commentAlert = post.querySelector('.comment-alert');
 
+      // process reactions such as likes & dislikes
+      const processReaction = (likeButton, dislikeButton, alert, response) => {
+        console.log(response);
+
+        if (response.result === false) {
+          alert.style.display = 'initial';
+          return false;
+        }
+
+        likeButton.querySelector('span').innerText = response.likes;
+        dislikeButton.querySelector('span').innerText = response.dislikes;
+        return true;
+      }
 
       // When like btn is clicked
       likeBtn.addEventListener('click', (event) => {
+        console.log(`/api/reaction.php?id=${id}&status=1`);
         fetch(`/api/reaction.php?id=${id}&status=1`)
           .then(res => res.json())
           .then(json => {
-            if (!processReaction(likeBtn, likeAlert, dislikeBtn, json));
+            console.log(processReaction(likeBtn, dislikeBtn, likeAlert, json));
 
           });
       });
 
       // When dislike btn is clicked
       dislikeBtn.addEventListener('click', (event) => {
-        fetch(`/api/reaction.php?id=${id}&status=2`)
+        console.log(`/api/reaction.php?id=${id}&status=-1`);
+
+        fetch(`/api/reaction.php?id=${id}&status=-1`)
           .then(res => res.json())
           .then(json => {
-            processReaction(dislikeBtn, dislikeAlert, likeBtn, json);
+            console.log(processReaction(likeBtn, dislikeBtn, dislikeAlert, json));
           });
       });
 
       // When comment btn is clicked
       commentBtn.addEventListener('click', (event) => {
-        fetch(`/api/reaction.php?id=${id}&status=0`)
+        console.log(`/api/reaction.php?id=${id}&status=1`);
+        fetch(`/api/reaction.php?id=${id}&status=1`)
           .then(res => res.json())
           .then(json => {
             console.log(json);

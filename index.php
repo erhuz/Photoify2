@@ -11,8 +11,8 @@ $query = 'SELECT
         posts.created_at,
         users.name,
         users.avatar,
-        ifnull((SELECT COUNT(reactions.status) WHERE reactions.status = 1), 0 ) as likeCount,
-        ifnull((SELECT COUNT(reactions.status) WHERE reactions.status = -1), 0 ) as dislikeCount
+        COALESCE(SUM(reactions.status = 1), 0 ) as likeCount,
+        COALESCE(SUM(reactions.status = -1), 0 ) as dislikeCount
 
     FROM posts
     JOIN users ON posts.user_id = users.id

@@ -17,8 +17,9 @@ $query = 'SELECT
         users.bio,
         users.avatar,
         users.created_at,
-        (SELECT COUNT(reactions.status) WHERE reactions.status = 1) as likeCount,
-        (SELECT COUNT(reactions.status) WHERE reactions.status = -1) as dislikeCount
+        COALESCE(SUM(reactions.status = 1), 0 ) as likeCount,
+        COALESCE(SUM(reactions.status = -1), 0 ) as dislikeCount
+
 
     FROM users
     LEFT OUTER JOIN reactions ON reactions.user_id = users.id
@@ -58,13 +59,13 @@ $query = 'SELECT
         posts.created_at,
         users.name,
         users.avatar,
-        ifnull((SELECT COUNT(reactions.status) WHERE reactions.status = 1), 0 ) as likeCount,
-        ifnull((SELECT COUNT(reactions.status) WHERE reactions.status = -1), 0 ) as dislikeCount
+        COALESCE(SUM(reactions.status = 1), 0 ) as likeCount,
+        COALESCE(SUM(reactions.status = -1), 0 ) as dislikeCount
 
     FROM posts
     JOIN users ON posts.user_id = users.id AND users.id = :id
     LEFT OUTER JOIN reactions ON posts.id = reactions.post_id
-    GROUP BY posts.id, users.id, reactions.status
+    GROUP BY posts.id
     ORDER BY posts.created_at DESC;';
 
 $stmt = $pdo->prepare($query);
@@ -83,10 +84,16 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </header>
 
     <article class="row mt-4 mx-0 d-flex justify-content-center">
-        <div class="col-sm-12 col-md-4 col-lg m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Joined:</b> <?= $joined_date ?></div>
-        <div class="col-sm-12 col-md-4 col-lg m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Likes:</b> <?= $user['likeCount'] ?></div>
-        <div class="col-sm-12 col-md-4 col-lg m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Dislikes:</b> <?= $user['dislikeCount'] ?></div>
-        <div class="col-sm-12 col-md-4 col-lg m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Comments:</b> <?= $user['id'] ?></div>
+        <div class="col">
+            <div class="col-sm-12 col-md-4 col-lg m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Biography<br><br></b> <?= $user['bio']; ?></div>
+        </div>
+        <div class="col">
+            <div class="col m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Joined:</b> <?= $joined_date ?></div>
+            <div class="col m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Likes:</b> <?= $user['likeCount'] ?></div>
+            <div class="col m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Dislikes:</b> <?= $user['dislikeCount'] ?></div>
+            <div class="col m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Comments:</b> <?= $user['id'] ?></div>
+        </div>
+
     </article>
 
     <article id="post-container" class="row">
