@@ -151,6 +151,10 @@ $iconic-gradient: linear-gradient(135deg, #1c5d8e 0%,#863589 50%,#d63b5d 100%);
     display: none;
 }
 
+.white-space-nowrap{
+    white-space: nowrap
+}
+
 // Profile styling (public profiles)
 .profile{
     header{

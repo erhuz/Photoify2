@@ -166,6 +166,10 @@
   display: none;
 }
 
+.white-space-nowrap {
+  white-space: nowrap;
+}
+
 .profile header .profile-img {
   width: 100%;
   border: 4px solid #332;
