@@ -10,7 +10,7 @@ if(!isset($_GET['id'])){
 
 $user_id = intval(filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT));
 
-$query = "SELECT
+$query = 'SELECT
         users.id,
         users.name,
         users.avatar,
@@ -23,7 +23,7 @@ $query = "SELECT
     FROM users
     LEFT OUTER JOIN reactions ON reactions.user_id = users.id
     WHERE users.id = :id
-    GROUP BY users.id;";
+    GROUP BY users.id;';
 
 $params = [':id' => $user_id];
 
