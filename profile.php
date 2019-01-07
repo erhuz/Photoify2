@@ -91,8 +91,8 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
         <?php endif; ?>
-        <div class="col-md-12">
-            <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-6 ml-md-4">
+            <div class="row">
                 <div class="col white-space-nowrap m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Joined:</b> <?= $joined_date ?></div>
                 <div class="col white-space-nowrap m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Likes:</b> <?= $user['likeCount'] ?></div>
                 <div class="col white-space-nowrap m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Dislikes:</b> <?= $user['dislikeCount'] ?></div>

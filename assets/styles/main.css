@@ -170,6 +170,12 @@
   white-space: nowrap;
 }
 
+@media screen and (min-width: 721px) {
+  .ml-md-4 {
+    margin-left: 1.5rem !important;
+  }
+}
+
 .profile header .profile-img {
   width: 100%;
   border: 4px solid #332;
