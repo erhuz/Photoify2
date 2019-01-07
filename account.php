@@ -58,8 +58,8 @@
         </div>
         <div class="row mt-4">
             <div class="col">
-                <a href="#" class="btn btn-primary btn-block">Create new post</a>
-                <a href="#" class="btn btn-primary btn-block">Manage my posts</a>
+                <a href="/post/new.php" class="btn btn-primary btn-block">Create new post</a>
+                <a href="/profile.php?id=<?= User['id'] ?>" class="btn btn-primary btn-block">Manage my posts</a>
                 <a href="#" class="btn btn-danger btn-block">Delete account</a>
             </div>
         </div>
