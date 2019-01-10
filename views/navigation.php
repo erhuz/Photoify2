@@ -11,9 +11,15 @@
                 <a class="nav-link" href="/index.php">Home</a>
             </li><!-- /nav-item -->
 
-            <li class="nav-item <?= ($page === 'about') ? 'active' : NULL?>">
-                <a class="nav-link" href="/about.php">About</a>
-            </li><!-- /nav-item -->
+            <?php if(USER_IS_LOGGEDIN): ?>
+                <li class="nav-item <?= ($page === 'post') ? 'active' : NULL?>">
+                    <a class="nav-link" href="/post/new.php">New post</a>
+                </li><!-- /nav-item -->
+
+                <li class="nav-item <?= ($page === 'profile') ? 'active' : NULL?>">
+                    <a class="nav-link" href="/profile.php?id=<?= User['id'] ?>">Manage posts</a>
+                </li><!-- /nav-item -->
+            <?php endif; ?>
         </ul>
         <ul class="navbar-nav ml-auto">
             <?php if(USER_IS_LOGGEDIN): ?>
