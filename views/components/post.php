@@ -62,14 +62,18 @@
                 <!-- Reaction buttons -->
                 <div class="container">
                     <div class="row">
-                        <button type="button" class="like btn btn-primary m-2 col"><i class="fa fa-thumbs-o-up"
-                                aria-hidden="true"></i> <span>
-                                <?= $likeCount ?></span></button>
-                        <button type="button" class="dislike btn btn-primary m-2 col"><i class="fa fa-thumbs-o-down"
-                                aria-hidden="true"></i> <span>
-                                <?= $dislikeCount ?></span></button>
-                        <button type="button" class="comment btn btn-primary m-2 col"><i class="fa fa-comment-o"
-                                aria-hidden="true"></i> <span>Disabled</span></button>
+                        <button type="button" class="like btn btn-primary m-2 col">
+                            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                            <span><?= $likeCount ?></span>
+                        </button>
+                        <button type="button" class="dislike btn btn-primary m-2 col">
+                            <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                            <span><?= $dislikeCount ?></span>
+                        </button>
+                        <button type="button" class="commentBtn btn btn-primary m-2 col">
+                            <i class="fa fa-comment-o" aria-hidden="true"></i>
+                            <span>69</span>
+                        </button>
                     </div>
                 </div> <!-- /Reaction buttons -->
 
@@ -112,9 +116,28 @@
 
                 <!-- Comments / footer -->
                 <div class="card-footer container">
+                    <div class="row show-comments-btn-container">
+                        <div class="col text-muted show-comments-btn">
+                            <button class="btn btn-primary btn-block">
+                                Show Comments <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+
                     <div class="row">
-                        <div class="col text-muted commentsBtn">
-                            Comments <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                        <div class="col">
+                            <hr>
+                            <form class="comment-form">
+                                <label for="comment-input-<?= $post_id ?>">Write a comment:</label><br>
+                                <input
+                                    class="comment-input form-control"
+                                    type="text"
+                                    name="content"
+                                    id="comment-input-<?= $post_id ?>"
+                                    placeholder="Give us your thoughts..."
+                                >
+                                <button class="btn btn-primary btn-block mt-1" type="submit"><i class="fa fa-comment-o" aria-hidden="true"></i> Comment</button>
+                            </form>
                         </div>
                     </div>
 
@@ -143,7 +166,9 @@
                             </div>
 
                         </div>
-                    </div> <!-- /Comment --><div class="row comment"> <!-- Comment -->
+                    </div> <!-- /Comment -->
+
+                    <div class="row comment"> <!-- Comment -->
                         <div class="col">
                             <hr>
 
