@@ -102,6 +102,7 @@
                             <h6 class="text-muted pl-3">Description</h6>
                             <div class="description-content">
                                 <p class="mb-0 lead bg-white p-1 pl-2">
+                                    <?php /* This row below is to preserve input line-breaks and spaces */ ?>
                                     <?= str_replace(PHP_EOL, '<br>', str_replace(' ', '&nbsp', $post_description)) ?>
                                 </p>
                             </div>
