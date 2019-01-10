@@ -13,7 +13,7 @@
                             <?= $user_name ?>
                         </a>
                     </h5>
-                </div>
+                </div> <!-- /User header -->
                 <?php if(USER_IS_LOGGEDIN && intval($user_id) === intval(User['id'])): ?>
 
                 <!-- Delete-modal -->
@@ -37,8 +37,7 @@
                             </div>
                         </div>
                     </div>
-
-                </div>
+                </div> <!-- /Delete-modal -->
 
                 <!-- Post modification buttons -->
                 <div class="container">
@@ -49,12 +48,16 @@
                                 aria-hidden="true"></i> Edit</a>
                     </div>
                 </div>
-                <?php endif; ?>
+                <?php endif; ?> <!-- /Post modification buttons -->
 
                 <!-- Post image -->
                 <div class="card-image">
                     <img src="<?= get_image($post_image, 'post') ?>" alt="<?= $post_description ?>">
                 </div>
+                <div class="text-muted p-2 bg-light border-bottom small-text">
+                    Upload date:
+                    <?= date('d-m-Y', strtotime($post_created_at)); ?>
+                </div> <!-- /Post image -->
 
                 <!-- Reaction buttons -->
                 <div class="container">
@@ -68,7 +71,7 @@
                         <button type="button" class="comment btn btn-primary m-2 col"><i class="fa fa-comment-o"
                                 aria-hidden="true"></i> <span>Disabled</span></button>
                     </div>
-                </div>
+                </div> <!-- /Reaction buttons -->
 
                 <!-- Reaction alerts -->
                 <div class="container text-white bg-danger">
@@ -90,25 +93,83 @@
                                 comment.</p>
                         </div>
                     </div>
-                </div>
+                </div> <!-- Reaction alerts -->
 
                 <!-- Post description -->
                 <div class="card-body">
-                    <div class="card-text">
-                        <h6 class="text-muted">Description</h6>
-                        <div class="p-2 pl-3 border border-info rounded">
-                            <p class="mb-0">
-                                <?= str_replace(PHP_EOL, '<br>', str_replace(' ', '&nbsp', $post_description)) ?>
-                            </p>
+                    <div class="card-text pl-0 pt-0">
+                        <div class="p-2 pl-0 description">
+                            <h6 class="text-muted pl-3">Description</h6>
+                            <div class="description-content">
+                                <p class="mb-0 lead bg-white p-1 pl-2">
+                                    <?= str_replace(PHP_EOL, '<br>', str_replace(' ', '&nbsp', $post_description)) ?>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </div> <!-- Post description -->
 
-                <!-- Upload date / footer -->
-                <div class="card-footer text-muted">
-                    Upload date:
-                    <?= $post_created_at ?>
-                </div>
+                <!-- Comments / footer -->
+                <div class="card-footer container">
+                    <div class="row">
+                        <div class="col text-muted commentsBtn">
+                            Comments <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                        </div>
+                    </div>
+
+                    <div class="row comment"> <!-- Comment -->
+                        <div class="col">
+                            <hr>
+
+                            <div class="row comment-user-info">
+                                <div class="comment-user-avatar">
+                                    <img class="profile-picture rounded-circle" src="<?= get_image($user_avatar, 'avatar') ?>" alt="">
+                                </div>
+
+                                <h6 class="comment-user-name-container m-0 ml-2">
+                                    <a class="comment-user-name" href="<?= '/profile.php?id=' . $user_id ?>">
+                                        <?= $user_name ?>
+                                    </a>
+                                </h6>
+                            </div>
+
+                            <div class="row">
+                                <div class="col comment-content p-0">
+                                    <div class="bg-light p-1 pl-2">
+                                        This commen thing isn't really me.
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div> <!-- /Comment --><div class="row comment"> <!-- Comment -->
+                        <div class="col">
+                            <hr>
+
+                            <div class="row comment-user-info">
+                                <div class="comment-user-avatar">
+                                    <img class="profile-picture rounded-circle" src="<?= get_image($user_avatar, 'avatar') ?>" alt="">
+                                </div>
+
+                                <h6 class="comment-user-name-container m-0 ml-2">
+                                    <a class="comment-user-name" href="<?= '/profile.php?id=' . $user_id ?>">
+                                        <?= $user_name ?>
+                                    </a>
+                                </h6>
+                            </div>
+
+                            <div class="row">
+                                <div class="col comment-content p-0">
+                                    <div class="bg-light p-1 pl-2">
+                                        This commen thing isn't really me.
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div> <!-- /Comment -->
+
+                </div> <!-- /Comments / footer -->
 
             </div>
         </div>
