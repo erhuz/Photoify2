@@ -55,6 +55,7 @@
       const likeBtn = post.querySelector('.like');
       const dislikeBtn = post.querySelector('.dislike');
       const commentBtn = post.querySelector('.comment');
+      const showCommentsBtn = post.querySelector('.show-comments-btn');
 
       const likeAlert = post.querySelector('.like-alert');
       const dislikeAlert = post.querySelector('.dislike-alert');
@@ -73,6 +74,22 @@
         return true;
       }
 
+      const readComments = (id) => {
+        fetch(`/api/comment.php?id=${id}&action=read`)
+          .then(res => res.json())
+          .then(json => {
+            commentAlert.style.display = 'initial';
+          });
+      }
+
+      const storeComment = (id, content) => {
+        fetch(`/api/comment.php?id=${id}&action=store&content=${commentInputContent}`)
+        .then(res => res.json())
+        .then(json => {
+          showComments(id);
+        });
+      }
+
       // When like btn is clicked
       likeBtn.addEventListener('click', (event) => {
         fetch(`/api/reaction.php?id=${id}&status=1`)
@@ -89,18 +106,17 @@
         fetch(`/api/reaction.php?id=${id}&status=-1`)
           .then(res => res.json())
           .then(json => {
-            processReaction(likeBtn, dislikeBtn, dislikeAlert, json);
+            readComments(id);
           });
       });
 
       // When comment btn is clicked
       commentBtn.addEventListener('click', (event) => {
 
-        fetch(`/api/reaction.php?id=${id}&status=1`)
-          .then(res => res.json())
-          .then(json => {
-            commentAlert.style.display = 'initial';
-          });
+      });
+
+      showCommentsBtn.addEventListener('click', (event) => {
+        readComments(id);
       });
 
       // Delete btn modal
