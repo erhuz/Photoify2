@@ -1,4 +1,4 @@
-<?php $page = 'post'; ?>
+<?php $page = 'profile'; ?>
 
 <?php require __DIR__.'/views/header.php'; ?>
 
@@ -36,20 +36,12 @@ if(!$stmt){
 $stmt->execute($params);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+if(!$user){
+    set_alert('User doesn\'t exist. Redirected.', 'warning');
+    redirect('/');
+}
 
-
-// if(!$user){
-//     set_alert('User doesn\'t exists. Redirected', 'warning');
-//     redirect('/');
-// }
-
-// echo "<pre>";
-// die(print_r($user));
-
-$joined_date = date('d/m/Y', strtotime($user['created_at']));
-
-
-
+$joined_date = date('d-m-Y', strtotime($user['created_at']));
 
 $query = 'SELECT
         posts.id,
@@ -91,15 +83,15 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
         </div>
         <?php endif; ?>
-        <div class="col-12 col-md-6 ml-md-4">
+
+        <div class="<?= (strlen($user['bio']) > 0 ) ? 'col-12 col-md-6 ml-md-4' : 'col-12' ?>">
             <div class="row">
                 <div class="col white-space-nowrap m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Joined:</b> <?= $joined_date ?></div>
-                <div class="col white-space-nowrap m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Likes:</b> <?= $user['likeCount'] ?></div>
-                <div class="col white-space-nowrap m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Dislikes:</b> <?= $user['dislikeCount'] ?></div>
-                <div class="col white-space-nowrap m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Comments:</b> <?= $user['id'] ?></div>
+                <div id="profile-likes" class="col white-space-nowrap m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Likes:</b> <?= $user['likeCount'] ?></div>
+                <div id="profile-dislikes" class="col white-space-nowrap m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Dislikes:</b> <?= $user['dislikeCount'] ?></div>
+                <div id="profile-comments" class="col white-space-nowrap m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Comments:</b> <?= $user['id'] ?></div>
             </div>
         </div>
-
     </article>
 
     <article id="post-container" class="row">
