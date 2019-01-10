@@ -62,7 +62,6 @@
 
       // process reactions such as likes & dislikes
       const processReaction = (likeButton, dislikeButton, alert, response) => {
-        console.log(response);
 
         if (response.result === false) {
           alert.style.display = 'initial';
@@ -76,33 +75,30 @@
 
       // When like btn is clicked
       likeBtn.addEventListener('click', (event) => {
-        console.log(`/api/reaction.php?id=${id}&status=1`);
         fetch(`/api/reaction.php?id=${id}&status=1`)
           .then(res => res.json())
           .then(json => {
-            console.log(processReaction(likeBtn, dislikeBtn, likeAlert, json));
+            processReaction(likeBtn, dislikeBtn, likeAlert, json);
 
           });
       });
 
       // When dislike btn is clicked
       dislikeBtn.addEventListener('click', (event) => {
-        console.log(`/api/reaction.php?id=${id}&status=-1`);
 
         fetch(`/api/reaction.php?id=${id}&status=-1`)
           .then(res => res.json())
           .then(json => {
-            console.log(processReaction(likeBtn, dislikeBtn, dislikeAlert, json));
+            processReaction(likeBtn, dislikeBtn, dislikeAlert, json);
           });
       });
 
       // When comment btn is clicked
       commentBtn.addEventListener('click', (event) => {
-        console.log(`/api/reaction.php?id=${id}&status=1`);
+
         fetch(`/api/reaction.php?id=${id}&status=1`)
           .then(res => res.json())
           .then(json => {
-            console.log(json);
             commentAlert.style.display = 'initial';
           });
       });
