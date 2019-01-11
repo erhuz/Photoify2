@@ -129,7 +129,6 @@
               commentLoader.style.display = 'none';
             }
 
-
           })
           .catch((error) => {
             commentLoader.style.display = 'none';
@@ -166,16 +165,6 @@
           });
       });
 
-      /** Comment Psuedo
-       *  If comment (reaction button) is clicked
-       *    remove show-comments-btn, show comment form (w/ first input
-       *     clicked), load comments on post
-       *
-       *  If show-comments-btn is clicked
-       *    remove show-comments-btn, show comment form, load comments on posts
-       */
-
-      //! COMMENT DISPLAY BUTTONS
       // When comment btn is clicked
       commentBtn.addEventListener('click', (event) => {
 
@@ -200,14 +189,12 @@
         const modal = post.querySelector('.custom_modal');
 
         deleteBtn.addEventListener('click', () => {
-
           modal.style.display = 'initial';
           post.querySelectorAll('.custom_modal .close-btn').forEach((btn) => {
             btn.addEventListener('click', () => {
               modal.style.display = 'none';
             });
           });
-
         });
       }
 
