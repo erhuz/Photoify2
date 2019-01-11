@@ -51,17 +51,18 @@
     const posts = post_container.querySelectorAll('section');
 
     posts.forEach((post) => {
-      const id = post.querySelector('.post').dataset.id;
+      let id = post.querySelector('.post').dataset.id;
       const likeBtn = post.querySelector('.like');
       const dislikeBtn = post.querySelector('.dislike');
       const commentBtn = post.querySelector('.comment-btn');
 
       const showCommentsBtn = post.querySelector('.show-comments-btn');
       const commentFormContainer = post.querySelector('.comment-form-container');
-      const commentForm = post.querySelector('.comment-form');
       const commentContainer = post.querySelector('.comment-container');
       const commentLoader = post.querySelector('.comment-loader');
-      const commentSubmit = post.querySelector('form .button [type="submit"]');
+      const commentForm = post.querySelector('form.comment-form');
+      const commentInput = post.querySelector('form.comment-form input[type="text"]');
+      const commentSubmit = post.querySelector('form.comment-form .button [type="submit"]');
 
       const likeAlert = post.querySelector('.like-alert');
       const dislikeAlert = post.querySelector('.dislike-alert');
@@ -82,7 +83,6 @@
 
       const readComments = (id) => {
         commentLoader.style.display = 'initial';
-        console.log(`/api/comment.php?id=${id}&action=read`);
         fetch(`/api/comment.php?id=${id}&action=read`)
           .then(res => res.json())
           .then(comments => {
@@ -129,12 +129,10 @@
               commentLoader.style.display = 'none';
             }
 
-            console.log(comments);
 
           })
           .catch((error) => {
             commentLoader.style.display = 'none';
-            console.log(error);
           });
       }
 
@@ -149,6 +147,7 @@
 
       // When like btn is clicked
       likeBtn.addEventListener('click', (event) => {
+
         fetch(`/api/reaction.php?id=${id}&status=1`)
           .then(res => res.json())
           .then(json => {
@@ -182,7 +181,9 @@
 
         showCommentsBtn.style.display = 'none';
         commentFormContainer.style.display = 'initial';
-        readComments(5);
+        commentInput.focus();
+        commentInput.select();
+        readComments(id);
       });
 
       showCommentsBtn.addEventListener('click', (event) => {
@@ -190,7 +191,7 @@
         showCommentsBtn.style.display = 'none';
         commentFormContainer.style.display = 'initial';
         commentContainer.style.display = 'initial';
-        readComments(5);
+        readComments(id);
       });
 
       // Delete btn modal
