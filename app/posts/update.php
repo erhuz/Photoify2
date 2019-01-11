@@ -6,16 +6,6 @@ require __DIR__.'/../autoload.php';
 
 // In this file we delete posts in the database.
 
-/** Psuedo
- *  Sanitize input
- *  Update database w/ new description
- *  Check wether a new image was sent or not
- *      retrieve current image from db
- *          Move new image to uploads
- *              delete current image from uploads folder
- *              Update database with new image
- */
-
 if(!isset($_POST['post_id'], $_POST['description'])){
     set_alert('Input missing, update aborted.', 'danger');
     redirect('/post/edit.php?id=' . $post_id);

@@ -3,14 +3,6 @@ declare (strict_types = 1);
 
 require __DIR__.'/../app/autoload.php';
 
-/** PSUEDO
- *  Check if row exists w/status
- *      if status === inputStatus
- *          remove row
- *      if status !== inputStatus
- *          update row w/ new status
-*/
-
 // In this file we like posts and send the data back as encoded JSON.
 if(!USER_IS_LOGGEDIN){
     // End execution and send error
