@@ -1,8 +1,7 @@
 <?php
 declare (strict_types = 1);
 
-require __DIR__.'/../autoload.php';
-header('Content-Type: application/json');
+require __DIR__. '/../app/autoload.php';
 
 // In this file we comment on posts and send the data back as encoded JSON.
 
@@ -21,4 +20,6 @@ if($_GET['action'] === 'read'){
     $data = $comments;
 }
 
+header('Content-Type: application/json');
 echo json_encode($data);
+die;
