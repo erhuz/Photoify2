@@ -18,7 +18,8 @@ if($_GET['action'] === 'read'){
                 users.avatar
             FROM comments
             JOIN users ON users.id = comments.user_id
-            WHERE post_id = :post_id;';
+            WHERE post_id = :post_id
+            ORDER BY comments.created_at;';
     $params = [
         ':post_id' => $id
     ];
