@@ -54,8 +54,13 @@
       const id = post.querySelector('.post').dataset.id;
       const likeBtn = post.querySelector('.like');
       const dislikeBtn = post.querySelector('.dislike');
-      const commentBtn = post.querySelector('.comment');
+      const commentBtn = post.querySelector('.comment-btn');
+
       const showCommentsBtn = post.querySelector('.show-comments-btn');
+      const commentFormContainer = post.querySelector('.comment-form-container');
+      const commentForm = post.querySelector('.comment-form');
+      const commentContainer = post.querySelector('.comment-container');
+      const commentLoader = post.querySelector('.comment-loader');
 
       const likeAlert = post.querySelector('.like-alert');
       const dislikeAlert = post.querySelector('.dislike-alert');
@@ -75,10 +80,55 @@
       }
 
       const readComments = (id) => {
+        commentLoader.style.display = 'initial';
         fetch(`/api/comment.php?id=${id}&action=read`)
           .then(res => res.json())
-          .then(json => {
-            commentAlert.style.display = 'initial';
+          .then(comments => {
+            if(comments === false){
+              commentAlert.style.display = 'initial';
+            }else{
+              comments.forEach((commentData) => {
+                const comment = `
+                <div class="row comment"> <!-- Comment -->
+                  <div class="col">
+                    <hr>
+
+                    <div class="row comment-user-info">
+                      <div class="comment-user-avatar">
+                        <img class="profile-picture rounded-circle" src="${commentData.avatar}" alt="${commentData.name}">
+                      </div>
+
+                      <h6 class="comment-user-name-container m-0 ml-2">
+                        <a class="comment-user-name" href=/profile.php?id=USER_ID">
+                          ${commentData.name}
+                        </a>
+                      </h6>
+                    </div>
+
+                    <div class="row">
+                      <div class="col comment-content p-0">
+                        <div class="bg-light p-1 pl-2">
+                          ${commentData.content}
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div> <!-- /Comment -->
+                `;
+                commentContainer.innerHTML += comment;
+              });
+
+              commentContainer.style.display = 'initial';
+              commentLoader.style.display = 'none';
+            }
+
+            console.log(comments);
+
+          })
+          .catch((error) => {
+            commentLoader.style.display = 'none';
+            console.log(`error caught: ` + error);
           });
       }
 
@@ -106,17 +156,34 @@
         fetch(`/api/reaction.php?id=${id}&status=-1`)
           .then(res => res.json())
           .then(json => {
-            readComments(id);
+            processReaction(likeBtn, dislikeBtn, dislikeAlert, json);
           });
       });
 
+      /** Comment Psuedo
+       *  If comment (reaction button) is clicked
+       *    remove show-comments-btn, show comment form (w/ first input
+       *     clicked), load comments on post
+       *
+       *  If show-comments-btn is clicked
+       *    remove show-comments-btn, show comment form, load comments on posts
+       */
+
+      //! COMMENT DISPLAY BUTTONS
       // When comment btn is clicked
       commentBtn.addEventListener('click', (event) => {
 
+        showCommentsBtn.style.display = 'none';
+        commentFormContainer.style.display = 'initial';
+        readComments(5);
       });
 
       showCommentsBtn.addEventListener('click', (event) => {
-        readComments(id);
+
+        showCommentsBtn.style.display = 'none';
+        commentFormContainer.style.display = 'initial';
+        commentContainer.style.display = 'initial';
+        readComments(5);
       });
 
       // Delete btn modal
