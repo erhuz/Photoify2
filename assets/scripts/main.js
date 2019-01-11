@@ -61,6 +61,7 @@
       const commentForm = post.querySelector('.comment-form');
       const commentContainer = post.querySelector('.comment-container');
       const commentLoader = post.querySelector('.comment-loader');
+      const commentSubmit = post.querySelector('form .button [type="submit"]');
 
       const likeAlert = post.querySelector('.like-alert');
       const dislikeAlert = post.querySelector('.dislike-alert');
@@ -81,12 +82,14 @@
 
       const readComments = (id) => {
         commentLoader.style.display = 'initial';
+        console.log(`/api/comment.php?id=${id}&action=read`);
         fetch(`/api/comment.php?id=${id}&action=read`)
           .then(res => res.json())
           .then(comments => {
             if(comments === false){
               commentAlert.style.display = 'initial';
             }else{
+              let commentsOutput = '';
               comments.forEach((commentData) => {
                 const comment = `
                 <div class="row comment"> <!-- Comment -->
@@ -116,8 +119,11 @@
                   </div>
                 </div> <!-- /Comment -->
                 `;
-                commentContainer.innerHTML += comment;
+
+                commentsOutput += comment;
               });
+
+              commentContainer.innerHTML = commentsOutput;
 
               commentContainer.style.display = 'initial';
               commentLoader.style.display = 'none';
@@ -128,11 +134,12 @@
           })
           .catch((error) => {
             commentLoader.style.display = 'none';
-            console.log(`error caught: ` + error);
+            console.log(error);
           });
       }
 
       const storeComment = (id, content) => {
+        const commentInputContent = content;
         fetch(`/api/comment.php?id=${id}&action=store&content=${commentInputContent}`)
         .then(res => res.json())
         .then(json => {
