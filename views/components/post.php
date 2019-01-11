@@ -70,7 +70,7 @@
                             <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
                             <span><?= $dislikeCount ?></span>
                         </button>
-                        <button type="button" class="commentBtn btn btn-primary m-2 col">
+                        <button type="button" class="comment-btn btn btn-primary m-2 col">
                             <i class="fa fa-comment-o" aria-hidden="true"></i>
                             <span>69</span>
                         </button>
@@ -124,77 +124,34 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col">
-                            <hr>
-                            <form class="comment-form">
-                                <label for="comment-input-<?= $post_id ?>">Write a comment:</label><br>
-                                <input
-                                    class="comment-input form-control"
-                                    type="text"
-                                    name="content"
-                                    id="comment-input-<?= $post_id ?>"
-                                    placeholder="Give us your thoughts..."
-                                >
-                                <button class="btn btn-primary btn-block mt-1" type="submit"><i class="fa fa-comment-o" aria-hidden="true"></i> Comment</button>
-                            </form>
+                    <?php if(USER_IS_LOGGEDIN): ?>
+                        <div class="row comment-form-container display-none">
+                            <div class="col">
+                                <form class="comment-form">
+                                    <label for="comment-input-<?= $post_id ?>">Write a comment:</label><br>
+                                    <input
+                                        class="comment-input form-control"
+                                        type="text"
+                                        name="content"
+                                        id="comment-input-<?= $post_id ?>"
+                                        placeholder="Give us your thoughts..."
+                                    >
+                                    <button class="btn btn-primary btn-block mt-1" type="submit"><i class="fa fa-comment-o" aria-hidden="true"></i> Comment</button>
+                                </form>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                    <div class="comment-loader display-none">
+                        <hr>
+                        <div class="icon-center hidden">
+                            <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>
+                            <span class="sr-only">Loading...</span>
                         </div>
                     </div>
 
-                    <div class="row comment"> <!-- Comment -->
-                        <div class="col">
-                            <hr>
+                    <div class="comment-container display-none"> <!-- Comment container -->
 
-                            <div class="row comment-user-info">
-                                <div class="comment-user-avatar">
-                                    <img class="profile-picture rounded-circle" src="<?= get_image($user_avatar, 'avatar') ?>" alt="">
-                                </div>
-
-                                <h6 class="comment-user-name-container m-0 ml-2">
-                                    <a class="comment-user-name" href="<?= '/profile.php?id=' . $user_id ?>">
-                                        <?= $user_name ?>
-                                    </a>
-                                </h6>
-                            </div>
-
-                            <div class="row">
-                                <div class="col comment-content p-0">
-                                    <div class="bg-light p-1 pl-2">
-                                        This commen thing isn't really me.
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div> <!-- /Comment -->
-
-                    <div class="row comment"> <!-- Comment -->
-                        <div class="col">
-                            <hr>
-
-                            <div class="row comment-user-info">
-                                <div class="comment-user-avatar">
-                                    <img class="profile-picture rounded-circle" src="<?= get_image($user_avatar, 'avatar') ?>" alt="">
-                                </div>
-
-                                <h6 class="comment-user-name-container m-0 ml-2">
-                                    <a class="comment-user-name" href="<?= '/profile.php?id=' . $user_id ?>">
-                                        <?= $user_name ?>
-                                    </a>
-                                </h6>
-                            </div>
-
-                            <div class="row">
-                                <div class="col comment-content p-0">
-                                    <div class="bg-light p-1 pl-2">
-                                        This commen thing isn't really me.
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div> <!-- /Comment -->
-
+                    </div> <!-- /Comment-container -->
                 </div> <!-- /Comments / footer -->
 
             </div>
