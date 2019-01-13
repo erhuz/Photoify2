@@ -135,23 +135,41 @@
           });
       }
 
-      const storeComment = (id, content) => {
-        const commentInputContent = content;
-        fetch(`/api/comment.php?id=${id}&action=store&content=${commentInputContent}`)
-        .then(res => res.json())
-        .then(json => {
-          showComments(id);
+      // Delete btn modal
+      if (post.querySelector('button.delete')) {
+        const deleteBtn = post.querySelector('button.delete');
+        const modal = post.querySelector('.custom_modal');
+
+        deleteBtn.addEventListener('click', () => {
+          modal.style.display = 'initial';
+          post.querySelectorAll('.custom_modal .close-btn').forEach((btn) => {
+            btn.addEventListener('click', () => {
+              modal.style.display = 'none';
+            });
+          });
         });
       }
 
+      commentForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const content = commentInput.value;
+        console.log(content);
+
+        fetch(`/api/comment.php?id=${id}&action=store&content=${content}`)
+        .then(res => res.json())
+        .then(json => {
+          // showComments(id);
+          console.log(json);
+        });
+      })
+
       // When like btn is clicked
       likeBtn.addEventListener('click', (event) => {
-
         fetch(`/api/reaction.php?id=${id}&status=1`)
           .then(res => res.json())
           .then(json => {
             processReaction(likeBtn, dislikeBtn, likeAlert, json);
-
           });
       });
 
@@ -168,35 +186,24 @@
       // When comment btn is clicked
       commentBtn.addEventListener('click', (event) => {
 
-        showCommentsBtn.style.display = 'none';
-        commentFormContainer.style.display = 'initial';
-        commentInput.focus();
-        commentInput.select();
-        readComments(id);
+        if(post.querySelector('.comment-form-container')){
+          commentFormContainer.classList.remove('display-none');
+          commentInput.focus();
+          commentInput.select();
+        }else{
+          commentAlert.style.display = 'initial';
+        }
+
       });
 
       showCommentsBtn.addEventListener('click', (event) => {
 
-        showCommentsBtn.style.display = 'none';
-        commentFormContainer.style.display = 'initial';
-        commentContainer.style.display = 'initial';
+        if(post.querySelector('.comment-form-container')){
+          commentFormContainer.classList.remove('display-none');
+        }
+
         readComments(id);
       });
-
-      // Delete btn modal
-      if (post.querySelector('button.delete')) {
-        const deleteBtn = post.querySelector('button.delete');
-        const modal = post.querySelector('.custom_modal');
-
-        deleteBtn.addEventListener('click', () => {
-          modal.style.display = 'initial';
-          post.querySelectorAll('.custom_modal .close-btn').forEach((btn) => {
-            btn.addEventListener('click', () => {
-              modal.style.display = 'none';
-            });
-          });
-        });
-      }
 
     });
 
