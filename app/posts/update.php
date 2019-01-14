@@ -6,6 +6,11 @@ require __DIR__.'/../autoload.php';
 
 // In this file we delete posts in the database.
 
+if(!USER_IS_LOGGEDIN){
+    set_alert('You must be logged in to take this action.');
+    redirect('/');
+}
+
 if(!isset($_POST['post_id'], $_POST['description'])){
     set_alert('Input missing, update aborted.', 'danger');
     redirect('/post/edit.php?id=' . $post_id);
