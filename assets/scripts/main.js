@@ -162,30 +162,32 @@
         });
       }
 
-      commentForm.addEventListener('submit', (event) => {
-        event.preventDefault();
+      if(document.querySelector(commentForm)){
+        commentForm.addEventListener('submit', (event) => {
+          event.preventDefault();
 
-        const content = commentInput.value;
-        commentInput.value = '';
+          const content = commentInput.value;
+          commentInput.value = '';
 
-        const sendComment = new FormData();
+          const sendComment = new FormData();
 
-        sendComment.append('id', id);
-        sendComment.append('action', 'store');
-        sendComment.append('content', content);
+          sendComment.append('id', id);
+          sendComment.append('action', 'store');
+          sendComment.append('content', content);
 
-        fetch(`/api/comment.php`, {
-          method: 'POST',
-          body: sendComment
+          fetch(`/api/comment.php`, {
+            method: 'POST',
+            body: sendComment
+          })
+          .then(res => res.json())
+          .then(json => {
+            readComments(id);
+          })
+          .catch(error => {
+            // Give user error message?
+          });
         })
-        .then(res => res.json())
-        .then(json => {
-          readComments(id);
-        })
-        .catch(error => {
-          // Give user error message?
-        });
-      })
+      }
 
       // When like btn is clicked
       likeBtn.addEventListener('click', (event) => {
