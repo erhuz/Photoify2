@@ -4,12 +4,24 @@ declare (strict_types = 1);
 require __DIR__. '/../app/autoload.php';
 
 // In this file we comment on posts and send the data back as encoded JSON.
-$data = ''; // Define the output variable
+$data; // Define the output variable
 
-$id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
+if(!isset($_POST['id'], $_POST['action']) || USER_IS_LOGGEDIN){
+    $data = false;
 
+    header('Content-Type: application/json');
+    echo json_encode($data);
+    die();
+}
 
-if($_GET['action'] === 'read'){
+$id = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
+$action = filter_var($_POST['action'], FILTER_SANITIZE_STRING);
+
+if(isset($_POST['content'])){
+    $content = filter_var($_POST['content'], FILTER_SANITIZE_STRING);
+}
+
+if($action === 'read'){
 
     $query = 'SELECT
                 comments.description,
@@ -43,8 +55,21 @@ if($_GET['action'] === 'read'){
         ];
     }
     $data = $tmp_comments;
-}elseif(_GET['action'] === 'store'){
-    $data = 'action status => store';
+}elseif($action === "store"){
+    $data['result'] = 'Store action recieved';
+    $query = 'INSERT INTO comments (user_id, post_id, description) VALUES (:user_id, :post_id, :description)';
+    $params = [
+        ':user_id' => User['id'],
+        ':post_id' => $id,
+        ':description' => $content
+    ];
+
+    $stmt = $pdo->prepare($query);
+    $stmt->execute($params);
+
+
+}else{
+    $data = false;
 }
 
 
