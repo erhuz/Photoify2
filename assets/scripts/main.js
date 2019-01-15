@@ -82,6 +82,7 @@
 
       const readComments = (id) => {
         commentLoader.style.display = 'initial';
+        commentContainer.style.display = 'none';
         const retrieveComments = new FormData();
 
         retrieveComments.append('id', id);
