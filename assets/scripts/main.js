@@ -10,7 +10,6 @@
     let profileImgInput = document.querySelector('.user-profile #image');
     const profileImg = document.querySelector('.profile-img-container img');
 
-
     clickableText.addEventListener('click', () => openProfileImgForm());
     innerProfileImgContainer.addEventListener('click', () => openProfileImgForm());
 
@@ -68,7 +67,7 @@
       const dislikeAlert = post.querySelector('.dislike-alert');
       const commentAlert = post.querySelector('.comment-alert');
 
-      // process reactions such as likes & dislikes
+      // Process reactions such as likes & dislikes
       const processReaction = (likeButton, dislikeButton, alert, response) => {
 
         if (response.result === false) {
@@ -83,11 +82,23 @@
 
       const readComments = (id) => {
         commentLoader.style.display = 'initial';
-        fetch(`/api/comment.php?id=${id}&action=read`)
+        const retrieveComments = new FormData();
+
+        retrieveComments.append('id', id);
+        retrieveComments.append('action', 'read');
+
+        fetch(`/api/comment.php`, {
+          method: 'POST',
+          body: retrieveComments
+        })
           .then(res => res.json())
           .then(comments => {
+
             if(comments === false){
               commentAlert.style.display = 'initial';
+            }else if(comments.length < 1){
+              commentLoader.style.display = 'none';
+              let commentsOutput = 'No comments on this post.';
             }else{
               let commentsOutput = '';
               comments.forEach((commentData) => {
@@ -132,6 +143,7 @@
           })
           .catch((error) => {
             commentLoader.style.display = 'none';
+            // Give user error message?
           });
       }
 
@@ -154,13 +166,24 @@
         event.preventDefault();
 
         const content = commentInput.value;
-        console.log(content);
+        commentInput.value = '';
 
-        fetch(`/api/comment.php?id=${id}&action=store&content=${content}`)
+        const sendComment = new FormData();
+
+        sendComment.append('id', id);
+        sendComment.append('action', 'store');
+        sendComment.append('content', content);
+
+        fetch(`/api/comment.php`, {
+          method: 'POST',
+          body: sendComment
+        })
         .then(res => res.json())
         .then(json => {
-          // showComments(id);
-          console.log(json);
+          readComments(id);
+        })
+        .catch(error => {
+          // Give user error message?
         });
       })
 
