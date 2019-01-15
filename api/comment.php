@@ -72,6 +72,8 @@ if($action === 'read'){
     $data = false;
 }
 
+// Remove this and tell people you optimized your application
+// sleep(1);
 
 header('Content-Type: application/json');
 echo json_encode($data);
