@@ -97,9 +97,6 @@
 
             if(comments === false){
               commentAlert.style.display = 'initial';
-            }else if(comments.length < 1){
-              commentLoader.style.display = 'none';
-              let commentsOutput = 'No comments on this post.';
             }else{
               let commentsOutput = '';
               comments.forEach((commentData) => {
@@ -135,7 +132,16 @@
                 commentsOutput += comment;
               });
 
+              if(comments.length < 1){
+                console.log(comments);
+
+                commentLoader.style.display = 'none';
+                commentsOutput = `<h4 class="text-center mt-4">No comments on this post.</h4>`;
+
+              }
+
               commentContainer.innerHTML = commentsOutput;
+              console.log(commentsOutput);
 
               commentContainer.style.display = 'initial';
               commentLoader.style.display = 'none';
