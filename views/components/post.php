@@ -116,31 +116,33 @@
 
                 <!-- Comments / footer -->
                 <div class="card-footer container">
+                <?php if(USER_IS_LOGGEDIN): ?>
+                    <div class="row comment-form-container display-none">
+                        <div class="col">
+                            <form class="comment-form">
+                                <label for="comment-input-<?= $post_id ?>">Write a comment:</label><br>
+                                <input
+                                    class="comment-input form-control"
+                                    type="text"
+                                    name="content"
+                                    id="comment-input-<?= $post_id ?>"
+                                    placeholder="Give us your thoughts..."
+                                >
+                                <button class="btn btn-primary btn-block mt-1 mb-4" type="submit">Comment <i class="fa fa-comment-o" aria-hidden="true"></i></button>
+                            </form>
+                            <hr>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
                     <div class="row show-comments-btn-container">
                         <div class="col text-muted show-comments-btn">
-                            <button class="btn btn-primary btn-block">
+                            <button class="btn btn-secondary btn-block">
                                 Show Comments <i class="fa fa-chevron-down" aria-hidden="true"></i>
                             </button>
                         </div>
                     </div>
 
-                    <?php if(USER_IS_LOGGEDIN): ?>
-                        <div class="row comment-form-container display-none">
-                            <div class="col">
-                                <form class="comment-form">
-                                    <label for="comment-input-<?= $post_id ?>">Write a comment:</label><br>
-                                    <input
-                                        class="comment-input form-control"
-                                        type="text"
-                                        name="content"
-                                        id="comment-input-<?= $post_id ?>"
-                                        placeholder="Give us your thoughts..."
-                                    >
-                                    <button class="btn btn-primary btn-block mt-1" type="submit"><i class="fa fa-comment-o" aria-hidden="true"></i> Comment</button>
-                                </form>
-                            </div>
-                        </div>
-                    <?php endif; ?>
                     <div class="comment-loader display-none">
                         <hr>
                         <div class="icon-center hidden">
