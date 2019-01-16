@@ -89,7 +89,7 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="col white-space-nowrap m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Joined:</b> <?= $joined_date ?></div>
                 <div id="profile-likes" class="col white-space-nowrap m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Likes:</b> <?= $user['likeCount'] ?></div>
                 <div id="profile-dislikes" class="col white-space-nowrap m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Dislikes:</b> <?= $user['dislikeCount'] ?></div>
-                <div id="profile-comments" class="col white-space-nowrap m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Comments:</b> <?= $user['id'] ?></div>
+                <!-- <div id="profile-comments" class="col white-space-nowrap m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Comments:</b> Disabled</div> -->
             </div>
         </div>
     </article>
