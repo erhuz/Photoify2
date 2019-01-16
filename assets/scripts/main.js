@@ -21,7 +21,6 @@
       profileImgForm.submit();
     });
 
-    //! TODO
     // Delete modal
     if (document.querySelector('button.delete-account')) {
       const deleteBtn = document.querySelector('button.delete-account');
@@ -97,7 +96,6 @@
       }
 
       const readComments = (id) => {
-
         commentLoader.style.display = 'initial';
         commentContainer.style.display = 'none';
         const retrieveComments = new FormData();
@@ -111,6 +109,7 @@
         })
           .then(res => res.json())
           .then(comments => {
+            console.log(comments);
 
             if(comments === false){
               commentAlert.style.display = 'initial';
