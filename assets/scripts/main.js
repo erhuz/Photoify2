@@ -2,7 +2,7 @@
 
 (function () {
 
-  // Scripts for the profile-page
+  // Scripts for the account-page
   if (document.querySelector('.user-profile')) {
     const clickableText = document.querySelector('.user-profile .img-change');
     const innerProfileImgContainer = document.querySelector('.user-profile .profile-img-container .inner-profile-img-container');
@@ -20,6 +20,9 @@
     profileImgForm.addEventListener('change', () => {
       profileImgForm.submit();
     });
+
+    //! TODO
+    // Delete modal
   }
 
   // Scripts for the avatar submit form
@@ -169,7 +172,7 @@
         });
       }
 
-      if(document.querySelector(commentForm)){
+      if(post.querySelector('form.comment-form')){
         commentForm.addEventListener('submit', (event) => {
           event.preventDefault();
 
