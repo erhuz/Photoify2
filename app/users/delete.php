@@ -12,7 +12,7 @@ if(!USER_IS_LOGGEDIN){
 }
 
 if(!isset($_POST['confirm_password'], $_POST['confirm_checkbox'])){
-    set_alert('Authentication failed. Account deletion aborted!', 'danger');
+    set_alert('You need to enter your password and check the agreement checkbox', 'danger');
     redirect('/account.php');
 }
 
@@ -27,8 +27,59 @@ $stmt = $pdo->prepare($query);
 $stmt->execute($params);
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-die(var_dump($result));
+if(!password_verify($password, $result['password'])){
+    set_alert('Authentication failed. Account deletion aborted!', 'danger');
+    redirect('/account.php');
+}
 
+// Retrieve avatar image name from database
+$query = 'SELECT
+        avatar
+        FROM users
+        WHERE users.id = :user_id;';
 
-// Validate password and checkbox value
-    // Delete user together with posts, reactions, comments and local images
+$stmt = $pdo->prepare($query);
+$stmt->execute($params); // Parameters didn't change since last query
+$avatar = $stmt->fetch(PDO::FETCH_ASSOC);
+
+unlink('../..' . get_image($avatar['avatar'], 'avatar'));
+
+// Retrieve post image names from database
+$query = 'SELECT
+        image
+        FROM posts
+        WHERE user_id = :user_id';
+
+$stmt = $pdo->prepare($query);
+$stmt->execute($params); // Parameters didn't change since last query
+$images = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Delete post images locally
+foreach($images as $image){
+    unlink('../..' . get_image($image['image'], 'post'));
+}
+
+// Delete reactions, comments, posts and user
+$query = 'DELETE FROM reactions WHERE reactions.user_id = :user_id;';
+$stmt = $pdo->prepare($query);
+$stmt->execute($params); // Parameters didn't change since last query
+
+$query = 'DELETE FROM comments WHERE comments.user_id = :user_id;';
+$stmt = $pdo->prepare($query);
+$stmt->execute($params); // Parameters didn't change since last query
+
+$query = 'DELETE FROM posts WHERE posts.user_id = :user_id;';
+$stmt = $pdo->prepare($query);
+$stmt->execute($params); // Parameters didn't change since last query
+
+$query = 'DELETE FROM users WHERE users.id = :user_id;';
+$stmt = $pdo->prepare($query);
+
+$stmt->execute($params); // Parameters didn't change since last query
+
+// All data should have been deleted by now
+
+set_alert('Your account has been deleted.', 'success');
+set_alert('We\'re sad to see you go. You\'re welcome back at any time!', 'info');
+unset($_SESSION['user']);
+redirect('/');
