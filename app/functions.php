@@ -77,9 +77,9 @@ if(!function_exists('get_image')){
     )
     {
         if(strtolower($type) == 'avatar'){
-            return '/../uploads/avatars/' . $image;
+            return '/uploads/avatars/' . $image;
         }elseif(strtolower($type) == 'post'){
-            return '/../uploads/posts/' . $image;
+            return '/uploads/posts/' . $image;
         }
     }
 }
