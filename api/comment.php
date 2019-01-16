@@ -6,7 +6,7 @@ require __DIR__. '/../app/autoload.php';
 // In this file we comment on posts and send the data back as encoded JSON.
 $data; // Define the output variable
 
-if(!isset($_POST['id'], $_POST['action']) || USER_IS_LOGGEDIN){
+if(!isset($_POST['id'], $_POST['action']) || !USER_IS_LOGGEDIN){
     $data = false;
 
     header('Content-Type: application/json');
