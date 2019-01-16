@@ -72,7 +72,6 @@
                         </button>
                         <button type="button" class="comment-btn btn btn-primary m-2 col">
                             <i class="fa fa-comment-o" aria-hidden="true"></i>
-                            <span>69</span>
                         </button>
                     </div>
                 </div> <!-- /Reaction buttons -->
