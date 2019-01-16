@@ -26,19 +26,19 @@
                 </div>
 
                 <form action="/app/users/delete.php" method="POST">
-                    <div class="row mt-4">
+                    <div class="row mt-4 d-flex justify-content-center">
                         <div class="border rounded p-4">
                             <label for="password_confirm">Type your password to confirm</label><br>
-                            <input class="form-control" type="password" placeholder="********"><br>
+                            <input name="confirm_password" class="form-control" type="password" placeholder="********"><br>
 
                             <label for="checkbox_confirm">Are you sure? Confirm: </label>
-                            <input class="" type="checkbox">
+                            <input name="confirm_checkbox" type="checkbox">
                         </div>
                     </div>
 
                     <div class="row mt-4">
                         <div class="col-6">
-                            <a href="" class="btn btn-block btn-danger text-white">DELETE</a>
+                            <button type="submit" class="btn btn-block btn-danger text-white">DELETE</button>
                         </div>
                         <div class="col-6">
                             <button class="close-btn btn btn-block btn-outline-secondary">CANCEL</button>
