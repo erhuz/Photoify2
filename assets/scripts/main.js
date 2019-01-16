@@ -109,7 +109,6 @@
         })
           .then(res => res.json())
           .then(comments => {
-            console.log(comments);
 
             if(comments === false){
               commentAlert.style.display = 'initial';
