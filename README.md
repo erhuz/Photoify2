@@ -1,4 +1,5 @@
 # Photoify
+[![StyleCI](https://github.styleci.io/repos/162587301/shield?branch=master)](https://github.styleci.io/repos/162587301)
 
 ## Hand-in project @ Yrgo Göteborg
 An Instagram-like application where users can upload, like and comment on eachothers images.
