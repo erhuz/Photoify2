@@ -5,7 +5,7 @@ declare(strict_types=1);
 require __DIR__.'/../autoload.php';
 
 // In this file we delete posts in the database.
-if(!USER_IS_LOGGEDIN){
+if (!USER_IS_LOGGEDIN) {
     set_alert('You need to be logged in to take this action.', 'danger');
     redirect('/');
 }
@@ -19,7 +19,7 @@ $params = [
 ];
 
 $stmt = $pdo->prepare($query);
-if(!$stmt->execute($params)){
+if (!$stmt->execute($params)) {
     set_alert('This post doesn\'t appear to exist', 'danger');
     redirect('/');
 }

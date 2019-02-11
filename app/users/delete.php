@@ -6,12 +6,12 @@ require __DIR__.'/../autoload.php';
 
 // In this file we delete users.
 
-if(!USER_IS_LOGGEDIN){
+if (!USER_IS_LOGGEDIN) {
     set_alert('You need to be logged in to take this action.', 'warning');
     redirect('/');
 }
 
-if(!isset($_POST['confirm_password'], $_POST['confirm_checkbox'])){
+if (!isset($_POST['confirm_password'], $_POST['confirm_checkbox'])) {
     set_alert('You need to enter your password and check the agreement checkbox', 'danger');
     redirect('/account.php');
 }
@@ -27,7 +27,7 @@ $stmt = $pdo->prepare($query);
 $stmt->execute($params);
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if(!password_verify($password, $result['password'])){
+if (!password_verify($password, $result['password'])) {
     set_alert('Authentication failed. Account deletion aborted!', 'danger');
     redirect('/account.php');
 }
@@ -55,7 +55,7 @@ $stmt->execute($params); // Parameters didn't change since last query
 $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Delete post images locally
-foreach($images as $image){
+foreach ($images as $image) {
     unlink('../..' . get_image($image['image'], 'post'));
 }
 

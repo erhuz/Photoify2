@@ -5,7 +5,7 @@ declare(strict_types=1);
 require __DIR__.'/../autoload.php';
 
 // In this file we login users.
-if(isset($_POST['email'], $_POST['password'])){
+if (isset($_POST['email'], $_POST['password'])) {
     $email = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
     $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
 
@@ -16,19 +16,19 @@ if(isset($_POST['email'], $_POST['password'])){
     ]);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if(!$result){
+    if (!$result) {
         set_alert('Login failed: Email or password was invalid.', 'danger');
         redirect('/login.php');
     }
 
-    if(password_verify($password, $result['password'])){
+    if (password_verify($password, $result['password'])) {
         $_SESSION['user'] = $result;
 
         set_alert("Welcome home, <b>{$result['name']}</b>.", 'info');
         redirect('/');
     }
-        set_alert('Login failed: Email or password was invalid.', 'danger');
-        redirect('/login.php');
+    set_alert('Login failed: Email or password was invalid.', 'danger');
+    redirect('/login.php');
 }
 
 set_alert('Something went wrong, please try again!', 'warning');
