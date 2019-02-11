@@ -14,7 +14,7 @@
                         </a>
                     </h5>
                 </div> <!-- /User header -->
-                <?php if(USER_IS_LOGGEDIN && intval($user_id) === intval(User['id'])): ?>
+                <?php if (USER_IS_LOGGEDIN && intval($user_id) === intval(User['id'])): ?>
 
                 <!-- Delete-modal -->
                 <div class="custom_modal">
@@ -115,7 +115,7 @@
 
                 <!-- Comments / footer -->
                 <div class="card-footer container">
-                <?php if(USER_IS_LOGGEDIN): ?>
+                <?php if (USER_IS_LOGGEDIN): ?>
                     <div class="row comment-form-container display-none">
                         <div class="col">
                             <form class="comment-form">

@@ -6,7 +6,7 @@ require __DIR__.'/../autoload.php';
 
 // In this file we store/insert new posts in the database.
 
-if(USER_IS_LOGGEDIN && isset($_FILES['image'], $_POST['description'])){
+if (USER_IS_LOGGEDIN && isset($_FILES['image'], $_POST['description'])) {
     $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
 
     $allow = array("jpg", "jpeg", "gif", "png");
@@ -19,8 +19,8 @@ if(USER_IS_LOGGEDIN && isset($_FILES['image'], $_POST['description'])){
 
     $upload_path = $upload_dir . $file_name;
 
-    if ( in_array( $file_extension, $allow) ) { // is this file allowed
-        if ( move_uploaded_file($_FILES['image']['tmp_name'], $upload_path)) {
+    if (in_array($file_extension, $allow)) { // is this file allowed
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $upload_path)) {
 
             // the file has been moved correctly
             $query = 'INSERT INTO posts (user_id, image, description) VALUES (:user_id, :image, :description);';
@@ -31,7 +31,7 @@ if(USER_IS_LOGGEDIN && isset($_FILES['image'], $_POST['description'])){
             ];
             $stmt = $pdo->prepare($query);
 
-            if(!$stmt){
+            if (!$stmt) {
                 set_alert('Something went wrong, please try again!', 'danger');
                 redirect('/');
             }
@@ -52,7 +52,6 @@ if(USER_IS_LOGGEDIN && isset($_FILES['image'], $_POST['description'])){
         set_alert("File extension <b>.$file_extension</b> not allowed. Allowed extensions: jpg, jpeg, gif, png", 'danger');
         redirect('/');
     }
-
 }
 
 set_alert('Something went wrong, please try again!', 'danger');

@@ -23,6 +23,6 @@ $pdo = new PDO($config['database_path']);
 // Define a global constant to check if user is loggedin
 define('USER_IS_LOGGEDIN', isset($_SESSION['user']));
 
-if(isset($_SESSION['user'])){
+if (isset($_SESSION['user'])) {
     define('User', $_SESSION['user']);
 }

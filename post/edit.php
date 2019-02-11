@@ -3,7 +3,7 @@
 <?php require __DIR__.'/../views/header.php'; ?>
 
 <?php
-if(!isset($_GET['id'])){
+if (!isset($_GET['id'])) {
     set_alert('ID missing, unable to edit post.', 'warning');
     redirect('/');
 }
@@ -21,7 +21,7 @@ $stmt = $pdo->prepare($query);
 $stmt->execute($params);
 $post = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if(!$post){
+if (!$post) {
     set_alert('This post doesn\'t appear to exist', 'warning');
     redirect('/');
 }
