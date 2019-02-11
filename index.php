@@ -31,7 +31,7 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </h1>
     <p class="col-12">Welcome to <?= $config['title'] ?>. Sign up to get started or check out the posts below!</p>
 
-    <?php if(USER_IS_LOGGEDIN): ?>
+    <?php if (USER_IS_LOGGEDIN): ?>
     <div class="col-12">
         <a href="/post/new.php" class="mr-2 btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Create Post</a>
         <a href="/profile.php?id=<?= User['id'] ?>" class="mr-2 btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i> Manage Posts</a>
@@ -42,7 +42,7 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 <article id="post-container" class="row">
-    <?php foreach($posts as $post): ?>
+    <?php foreach ($posts as $post): ?>
 
         <?php
             create_post(

@@ -7,10 +7,10 @@ require __DIR__.'/../autoload.php';
 // In this file we update users.
 
 // Update account information
-if(USER_IS_LOGGEDIN && isset($_POST['name'], $_POST['email'])){
+if (USER_IS_LOGGEDIN && isset($_POST['name'], $_POST['email'])) {
     $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
     $email = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
-    if(isset($_POST['bio'])){
+    if (isset($_POST['bio'])) {
         $bio = filter_var($_POST['bio'], FILTER_SANITIZE_STRING);
     }
 
@@ -21,17 +21,17 @@ if(USER_IS_LOGGEDIN && isset($_POST['name'], $_POST['email'])){
         ':email' => $email
     ];
 
-    if(isset($_POST['bio'])){
+    if (isset($_POST['bio'])) {
         $query = 'UPDATE users SET name=:name, email=:email, bio=:bio WHERE id=:id;';
         $params[':bio'] = $bio;
     }
 
     $stmt = $pdo->prepare($query);
-    if($stmt->execute($params)){
+    if ($stmt->execute($params)) {
         // $_SESSION['user'] only updates on login, this is a fix
         $_SESSION['user']['name'] = $name;
         $_SESSION['user']['email'] = $email;
-        if(isset($_POST['bio'])){
+        if (isset($_POST['bio'])) {
             $_SESSION['user']['bio'] = $bio;
         }
 
@@ -45,11 +45,11 @@ if(USER_IS_LOGGEDIN && isset($_POST['name'], $_POST['email'])){
 }
 
 // Password reset
-if(USER_IS_LOGGEDIN && isset($_POST['password'], $_POST['c_password'])){
+if (USER_IS_LOGGEDIN && isset($_POST['password'], $_POST['c_password'])) {
     $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
     $c_password = filter_var($_POST['c_password'], FILTER_SANITIZE_STRING);
 
-    if($password !== $c_password){
+    if ($password !== $c_password) {
         set_alert('Passwords did not match.', 'warning');
         redirect('/account.php');
     }
@@ -66,7 +66,7 @@ if(USER_IS_LOGGEDIN && isset($_POST['password'], $_POST['c_password'])){
 }
 
 // Change avatar
-if(USER_IS_LOGGEDIN && isset($_FILES['avatar'])){
+if (USER_IS_LOGGEDIN && isset($_FILES['avatar'])) {
     // Setup variables for file upload
     $allow = array("jpg", "jpeg", "gif", "png"); // Allowed file extensions
     $upload_dir = __DIR__ . '/../../uploads/avatars/';
@@ -74,8 +74,8 @@ if(USER_IS_LOGGEDIN && isset($_FILES['avatar'])){
     $file_name = hash("sha256", microtime(true) . $_FILES['avatar']['name']) . '.' . $file_extension;
     $upload_path = $upload_dir . $file_name;
 
-    if ( in_array( $file_extension, $allow) ) { // is this file allowed
-        if ( move_uploaded_file($_FILES['avatar']['tmp_name'], $upload_path)) {
+    if (in_array($file_extension, $allow)) { // is this file allowed
+        if (move_uploaded_file($_FILES['avatar']['tmp_name'], $upload_path)) {
 
             // the file has been moved correctly
             $query = 'UPDATE users SET avatar = :avatar WHERE id=:id;';
@@ -86,8 +86,8 @@ if(USER_IS_LOGGEDIN && isset($_FILES['avatar'])){
             ]);
 
             // Delete last used avatar if set
-            if(User['avatar'] !== 'avatar.png'){
-                unlink ( $upload_dir . User['avatar']);
+            if (User['avatar'] !== 'avatar.png') {
+                unlink($upload_dir . User['avatar']);
             }
 
             // $_SESSION['user'] only updates on login, this is a fix for the avatar

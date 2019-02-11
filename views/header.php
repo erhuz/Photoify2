@@ -2,7 +2,7 @@
 // Always start by loading the default application setup.
 require __DIR__.'/../app/autoload.php';
 
-if(USER_IS_LOGGEDIN && ($page === 'login' || $page === 'register')){
+if (USER_IS_LOGGEDIN && ($page === 'login' || $page === 'register')) {
     redirect('/index.php');
 }
 ?>

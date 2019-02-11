@@ -3,7 +3,7 @@
 <?php require __DIR__.'/views/header.php'; ?>
 
 <?php
-if(!isset($_GET['id'])){
+if (!isset($_GET['id'])) {
     set_alert('No user ID specified. Redirected', 'warning');
     redirect('/');
 }
@@ -29,14 +29,13 @@ $query = 'SELECT
 $params = [':id' => $user_id];
 
 $stmt = $pdo->prepare($query);
-if(!$stmt){
+if (!$stmt) {
     die(var_dump($pdo->errorInfo()));
-
 }
 $stmt->execute($params);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if(!$user){
+if (!$user) {
     set_alert('User doesn\'t exist. Redirected.', 'warning');
     redirect('/');
 }
@@ -76,7 +75,7 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </header>
 
     <article class="row mt-4 mx-0 d-flex justify-content-center">
-        <?php if(strlen($user['bio']) > 0): ?>
+        <?php if (strlen($user['bio']) > 0): ?>
         <div class="col">
             <div class="row">
                 <div class="col-sm-12 m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Biography<br><br></b> <?= $user['bio']; ?></div>
@@ -84,7 +83,7 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
         <?php endif; ?>
 
-        <div class="<?= (strlen($user['bio']) > 0 ) ? 'col-12 col-md-6 ml-md-4' : 'col-12' ?>">
+        <div class="<?= (strlen($user['bio']) > 0) ? 'col-12 col-md-6 ml-md-4' : 'col-12' ?>">
             <div class="row">
                 <div class="col white-space-nowrap m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Joined:</b> <?= $joined_date ?></div>
                 <div id="profile-likes" class="col white-space-nowrap m-2 section shadow-sm p-3 rounded border border-light profile-info"><b>Likes:</b> <?= $user['likeCount'] ?></div>
@@ -96,8 +95,8 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <article id="post-container" class="row">
         <h2 class="mx-2 mt-4 col-12"><?= $user['name'] ?>'s posts</h2>
-        <?php if(count($posts) > 0): ?>
-            <?php foreach($posts as $post): ?>
+        <?php if (count($posts) > 0): ?>
+            <?php foreach ($posts as $post): ?>
 
                 <?php
                     create_post(

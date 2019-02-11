@@ -7,22 +7,22 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item <?= ($page === 'home') ? 'active' : NULL?>">
+            <li class="nav-item <?= ($page === 'home') ? 'active' : null?>">
                 <a class="nav-link" href="/index.php">Home</a>
             </li><!-- /nav-item -->
 
-            <?php if(USER_IS_LOGGEDIN): ?>
-                <li class="nav-item <?= ($page === 'post') ? 'active' : NULL?>">
+            <?php if (USER_IS_LOGGEDIN): ?>
+                <li class="nav-item <?= ($page === 'post') ? 'active' : null?>">
                     <a class="nav-link" href="/post/new.php">New post</a>
                 </li><!-- /nav-item -->
 
-                <li class="nav-item <?= ($page === 'profile') ? 'active' : NULL?>">
+                <li class="nav-item <?= ($page === 'profile') ? 'active' : null?>">
                     <a class="nav-link" href="/profile.php?id=<?= User['id'] ?>">Manage posts</a>
                 </li><!-- /nav-item -->
             <?php endif; ?>
         </ul>
         <ul class="navbar-nav ml-auto">
-            <?php if(USER_IS_LOGGEDIN): ?>
+            <?php if (USER_IS_LOGGEDIN): ?>
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -38,11 +38,11 @@
 
             <?php else: ?>
 
-            <li class="nav-item <?= ($page === 'login') ? 'active' : NULL?>">
+            <li class="nav-item <?= ($page === 'login') ? 'active' : null?>">
                 <a class="nav-link" href="/login.php">Login</a>
             </li><!-- /nav-item -->
 
-            <li class="nav-item <?= ($page === 'register') ? 'active' : NULL?>">
+            <li class="nav-item <?= ($page === 'register') ? 'active' : null?>">
                 <a class="nav-link" href="/register.php">Register</a>
             </li><!-- /nav-item -->
 

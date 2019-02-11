@@ -43,17 +43,17 @@ if (!function_exists('get_alerts')) {
      */
     function get_alerts()
     {
-        if(isset($_SESSION['alerts'])){
-            foreach($_SESSION['alerts'] as $alert){
+        if (isset($_SESSION['alerts'])) {
+            foreach ($_SESSION['alerts'] as $alert) {
                 require(realpath(dirname(__FILE__) . '/../views/components/alert.php'));
             }
         }
 
-    unset($_SESSION['alerts']);
+        unset($_SESSION['alerts']);
     }
 }
 
-if(!function_exists('create_post')){
+if (!function_exists('create_post')) {
     function create_post(
         Int $post_id,
         String $post_image,
@@ -64,21 +64,19 @@ if(!function_exists('create_post')){
         String $user_avatar,
         Int $likeCount,
         Int $dislikeCount
-    )
-    {
+    ) {
         require __DIR__.'/../views/components/post.php';
     }
 }
 
-if(!function_exists('get_image')){
+if (!function_exists('get_image')) {
     function get_image(
         String $image,
         String $type
-    )
-    {
-        if(strtolower($type) == 'avatar'){
+    ) {
+        if (strtolower($type) == 'avatar') {
             return '/uploads/avatars/' . $image;
-        }elseif(strtolower($type) == 'post'){
+        } elseif (strtolower($type) == 'post') {
             return '/uploads/posts/' . $image;
         }
     }

@@ -1,10 +1,10 @@
 <?php
-declare (strict_types = 1);
+declare(strict_types = 1);
 
 require __DIR__.'/../app/autoload.php';
 
 // In this file we like posts and send the data back as encoded JSON.
-if(!USER_IS_LOGGEDIN){
+if (!USER_IS_LOGGEDIN) {
     // End execution and send error
     $data = ['result' => false];
 
@@ -21,7 +21,7 @@ $status = intval(filter_var($_GET['status'], FILTER_SANITIZE_NUMBER_INT));
 $status_accept = [1, -1];
 
 // Check if status doesn't have a valid value
-if(!in_array($status, $status_accept)){
+if (!in_array($status, $status_accept)) {
     // End execution and send error
     $data = ['result' => false];
 
@@ -41,7 +41,7 @@ $params = [
 $stmt = $pdo->prepare($query);
 
 // Check if execution was valid
-if(!$stmt->execute($params)){
+if (!$stmt->execute($params)) {
     $data = ['result' => ['error' => 'Query did not execute propperly.']];
 
     header('Content-Type: application/json');
@@ -52,12 +52,12 @@ if(!$stmt->execute($params)){
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
 // If status index is set, get the integer value
-if(isset($result['status'])){
+if (isset($result['status'])) {
     $result['status'] = intval($result['status']);
 }
 
 
-if(!$result){ // Check if result returned false
+if (!$result) { // Check if result returned false
     // Row not found
     $data = [
         'result' => 'Row not found'
@@ -69,8 +69,7 @@ if(!$result){ // Check if result returned false
         ':user_id' => User['id'],
         ':status' => $status
     ];
-
-}elseif($result['status'] === $status){ // Check if recieved status equals user sent status
+} elseif ($result['status'] === $status) { // Check if recieved status equals user sent status
     // Result same as recieved
     $data = [
         'result' => 'Result same as recieved'
@@ -82,7 +81,7 @@ if(!$result){ // Check if result returned false
         ':post_id' => $post_id,
         ':user_id' => User['id']
     ];
-}else{ // If recieved status does not equal user sent status
+} else { // If recieved status does not equal user sent status
     // Result not same as recieved, updated status.
     $data = [
         'result' => 'Result not same as recieved, updated status'
@@ -100,7 +99,7 @@ if(!$result){ // Check if result returned false
 // Prepare query
 try {
     $stmt = $pdo->prepare($query);
-    if(!$stmt->execute($params)){
+    if (!$stmt->execute($params)) {
         echo $query;
         echo 'shit';
     }

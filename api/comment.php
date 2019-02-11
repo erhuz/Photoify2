@@ -1,12 +1,12 @@
 <?php
-declare (strict_types = 1);
+declare(strict_types = 1);
 
 require __DIR__. '/../app/autoload.php';
 
 // In this file we comment on posts and send the data back as encoded JSON.
 $data; // Define the output variable
 
-if(!isset($_POST['id'], $_POST['action'])){
+if (!isset($_POST['id'], $_POST['action'])) {
     $data = false;
 
     header('Content-Type: application/json');
@@ -17,12 +17,11 @@ if(!isset($_POST['id'], $_POST['action'])){
 $id = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
 $action = filter_var($_POST['action'], FILTER_SANITIZE_STRING);
 
-if(isset($_POST['content'])){
+if (isset($_POST['content'])) {
     $content = filter_var($_POST['content'], FILTER_SANITIZE_STRING);
 }
 
-if($action === 'read'){
-
+if ($action === 'read') {
     $query = 'SELECT
                 comments.description,
                 users.id,
@@ -38,7 +37,7 @@ if($action === 'read'){
 
     $stmt = $pdo->prepare($query);
 
-    if(!$stmt){
+    if (!$stmt) {
         // REMOVE ME BEFORE PRODUCTION
         die(var_dump($pdo->errorInfo()));
     }
@@ -55,8 +54,8 @@ if($action === 'read'){
         ];
     }
     $data = $tmp_comments;
-}elseif($action === "store"){
-    if(!USER_IS_LOGGEDIN){
+} elseif ($action === "store") {
+    if (!USER_IS_LOGGEDIN) {
         $data = false;
 
         header('Content-Type: application/json');
@@ -74,9 +73,7 @@ if($action === 'read'){
 
     $stmt = $pdo->prepare($query);
     $stmt->execute($params);
-
-
-}else{
+} else {
     $data = false;
 }
 

@@ -6,12 +6,12 @@ require __DIR__.'/../autoload.php';
 
 // In this file we delete posts in the database.
 
-if(!USER_IS_LOGGEDIN){
+if (!USER_IS_LOGGEDIN) {
     set_alert('You must be logged in to take this action.');
     redirect('/');
 }
 
-if(!isset($_POST['post_id'], $_POST['description'])){
+if (!isset($_POST['post_id'], $_POST['description'])) {
     set_alert('Input missing, update aborted.', 'danger');
     redirect('/post/edit.php?id=' . $post_id);
 }
@@ -22,7 +22,7 @@ $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
 echo '<pre>';
 // description upload fail will not kill script,
 // due to image upload can still succeed
-if(strlen($description) > 0){
+if (strlen($description) > 0) {
     $query = 'UPDATE posts SET description = :description WHERE id=:id';
     $params = [
         ':description' => $description,
@@ -30,17 +30,16 @@ if(strlen($description) > 0){
     ];
 
     $stmt = $pdo->prepare($query);
-    if(!$stmt->execute($params)){
+    if (!$stmt->execute($params)) {
         set_alert('Description upload failed.', 'danger');
-    }else{
+    } else {
         set_alert('Successfully updated post description!', 'success');
     }
-
-}else{
+} else {
     set_alert('Failed to update post description.', 'danger');
 }
 
-if(strlen($_FILES['image']['tmp_name']) > 1){
+if (strlen($_FILES['image']['tmp_name']) > 1) {
     // Setup variables for file upload
     $allow = array("jpg", "jpeg", "gif", "png"); // Allowed file extensions
     $upload_dir = __DIR__ . '/../../uploads/posts/';
